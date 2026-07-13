@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>২৯ কার্ড গেম - অরিজিনাল মাল্টিপ্লেয়ার কার্ড গেম</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-wrapper">
+        <!-- Background Effects -->
+        <div class="landing-bg-cards">
+            <div class="bg-card" style="top: 10%; left: 5%; transform: rotate(-15deg);">♠</div>
+            <div class="bg-card" style="bottom: 15%; left: 25%; transform: rotate(10deg);">♥</div>
+            <div class="bg-card" style="top: 20%; right: 40%; transform: rotate(25deg);">♦</div>
+            <div class="bg-card" style="bottom: 10%; right: 10%; transform: rotate(-20deg);">♣</div>
+        </div>
+        <div class="landing-glow"></div>
+
+        <div class="landing-content">
+            <!-- LEFT SIDE -->
+            <div class="landing-left">
+                <div class="ll-badge">
+                    <span class="pulse-dot"></span>
+                    বাংলাদেশের জনপ্রিয় কার্ড গেম
+                </div>
+                <h1 class="ll-title">বন্ধুদের সাথে খেলুন<br>অরিজিনাল ২৯ কার্ড</h1>
+                <p class="ll-subtitle">অফলাইন ও অনলাইন মাল্টিপ্লেয়ার গেম • কোনো অ্যাড নেই • ব্রাউজারেই খেলুন</p>
+
+                <!-- Premium Floating Cards Display -->
+                <div class="hero-cards-display">
+                    <div class="hero-card card-1"><span class="suit">A♠</span></div>
+                    <div class="hero-card card-2"><span class="suit">K♥</span></div>
+                    <div class="hero-card card-3"><span class="suit">Q♦</span></div>
+                </div>
+
+                <div class="ll-features">
+                    <div class="ll-feature"><i class="fa-solid fa-earth-americas"></i> রিয়েল-টাইম অনলাইন</div>
+                    <div class="ll-feature"><i class="fa-solid fa-robot"></i> স্মার্ট এআই বট</div>
+                    <div class="ll-feature"><i class="fa-solid fa-users"></i> লোকাল মাল্টিপ্লেয়ার</div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="landing-right">
+                <div class="lr-glass-card">
+                    <h2 class="lr-title">সাবস্ক্রাইব করুন</h2>
+                    <p class="lr-subtitle">মোবাইল নম্বর দিয়ে শুরু করুন।<br>মাত্র ৪ টাকায় পান সব সুবিধা।</p>
+
+                    <div class="lr-stepper">
+                        <div class="step active"><div class="step-num">১</div> নম্বর দিন</div>
+                        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="step"><div class="step-num">২</div> OTP</div>
+                        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="step"><div class="step-num">৩</div> খেলুন</div>
+                    </div>
+
+                    <div class="lr-benefits">
+                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> অরিজিনাল ২৯ গেম রুলস</div>
+                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> ব্রাউজারে সরাসরি খেলার সুবিধা</div>
+                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> ২৪/৭ নিরবচ্ছিন্ন গেমিং</div>
+                    </div>
+
+                    <div class="lr-input-wrap">
+                        <div class="lr-prefix">BD +88</div>
+                        <input type="tel" id="phone-input" placeholder="01XXXXXXXXX" required autocomplete="off">
+                    </div>
+
+                    <div class="lr-warning">
+                        <i class="fa-solid fa-circle-info" style="margin-top:2px;"></i>
+                        <div>প্রতিদিন মাত্র ৪ টাকা চার্জ (ভ্যাট + এসডি + এসসি সহ)। শুধুমাত্র রবি ও এয়ারটেল গ্রাহকদের জন্য।</div>
+                    </div>
+
+                    <button id="auth-btn" class="primary-btn glow-btn" onclick="handleLogin()">গেম খেলা শুরু করুন ➔</button>
+                    <div id="loader" style="display:none; text-align:center; color:var(--gold-light); margin-top:15px; font-size:14px; font-weight:600;">অপেক্ষা করুন...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="landing-features-section">
+        <div class="section-header">
+            <span class="decor-line"></span>
+            <h2>আমাদের বিশেষ ফিচার</h2>
+            <span class="decor-line"></span>
+        </div>
+        
+        <div class="features-grid">
+            <div class="f-card">
+                <div class="fc-icon"><i class="fa-solid fa-globe"></i></div>
+                <div class="fc-title">অনলাইন মাল্টিপ্লেয়ার</div>
+                <div class="fc-subtitle">বিশ্বজুড়ে খেলোয়াড়দের সাথে খেলুন</div>
+            </div>
+            <div class="f-card">
+                <div class="fc-icon"><i class="fa-solid fa-user-group"></i></div>
+                <div class="fc-title">বন্ধুর সাথে খেলুন</div>
+                <div class="fc-subtitle">রুম তৈরি করুন ও বন্ধুদের আমন্ত্রণ করুন</div>
+            </div>
+            <div class="f-card">
+                <div class="fc-icon"><i class="fa-solid fa-robot"></i></div>
+                <div class="fc-title">বটের সাথে খেলুন</div>
+                <div class="fc-subtitle">স্মার্ট AI বটের সাথে অনুশীলন করুন</div>
+            </div>
+            <div class="f-card">
+                <div class="fc-icon"><i class="fa-solid fa-mobile-alt"></i></div>
+                <div class="fc-title">লোকাল মাল্টিপ্লেয়ার</div>
+                <div class="fc-subtitle">এক ডিভাইসে বন্ধুদের সাথে খেলুন</div>
+            </div>
+            <div class="f-card">
+                <div class="fc-icon"><i class="fa-solid fa-shield-alt"></i></div>
+                <div class="fc-title">সুরক্ষিত ও ফেয়ার প্লে</div>
+                <div class="fc-subtitle">নিরাপদ গেমিং ও ১০০% ফেয়ার প্লে</div>
+            </div>
+            <div class="f-card">
+                <div class="fc-icon"><i class="fa-solid fa-trophy"></i></div>
+                <div class="fc-title">লিডারবোর্ড ও র‍্যাংক</div>
+                <div class="fc-subtitle">লিডারবোর্ডে নিজের অবস্থান দেখুন</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modes Section -->
+    <div class="landing-modes-section">
+        <div class="section-header">
+            <span class="decor-line"></span>
+            <h2>বিভিন্ন গেম মোড</h2>
+            <span class="decor-line"></span>
+        </div>
+        <div class="modes-grid">
+            <div class="m-card">
+                <div class="mc-bg-glow"></div>
+                <div class="mc-icon-wrap"><i class="fa-solid fa-earth-americas"></i></div>
+                <div class="mc-title">অনলাইন ম্যাচ</div>
+                <div class="mc-subtitle">দ্রুত ম্যাচ, র‍্যাংকড ম্যাচ বা টুর্নামেন্টে অংশ নিন</div>
+                <button class="mc-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">খেলুন এখনই ➔</button>
+            </div>
+            <div class="m-card">
+                <div class="mc-bg-glow"></div>
+                <div class="mc-icon-wrap"><i class="fa-solid fa-users"></i></div>
+                <div class="mc-title">বন্ধুর সাথে খেলুন</div>
+                <div class="mc-subtitle">প্রাইভেট রুম তৈরি করুন এবং বন্ধুদের সাথে মজা করুন</div>
+                <button class="mc-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">রুম তৈরি করুন ➔</button>
+            </div>
+            <div class="m-card">
+                <div class="mc-bg-glow"></div>
+                <div class="mc-icon-wrap"><i class="fa-solid fa-robot"></i></div>
+                <div class="mc-title">বটের সাথে খেলুন</div>
+                <div class="mc-subtitle">সহজ, মাঝারি, কঠিন ও এক্সপার্ট লেভেলে খেলুন</div>
+                <button class="mc-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">বট মোড খেলুন ➔</button>
+            </div>
+            <div class="m-card">
+                <div class="mc-bg-glow"></div>
+                <div class="mc-icon-wrap"><i class="fa-solid fa-couch"></i></div>
+                <div class="mc-title">লোকাল মাল্টিপ্লেয়ার</div>
+                <div class="mc-subtitle">এক ডিভাইসে ২v২ বা ৪ প্লেয়ার একসাথে খেলুন</div>
+                <button class="mc-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">লোকাল খেলুন ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Alert Modal -->
+    <div class="custom-alert-overlay" id="customAlertOverlay">
+        <div class="custom-alert-box">
+            <div class="custom-alert-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="custom-alert-text" id="customAlertText">বার্তা</div>
+            <button class="custom-alert-btn" onclick="closeCustomAlert()">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <script>
+        function showCustomAlert(msg) {
+            document.getElementById('customAlertText').innerText = msg;
+            document.getElementById('customAlertOverlay').classList.add('active');
+        }
+
+        function closeCustomAlert() {
+            document.getElementById('customAlertOverlay').classList.remove('active');
+        }
+
+        async function handleLogin() {
+            const phone = document.getElementById("phone-input").value.trim();
+            const btn = document.getElementById("auth-btn");
+            const loader = document.getElementById("loader");
+            const phoneRegex = /^01[3-9]\d{8}$/;
+
+            if (!phoneRegex.test(phone)) {
+                showCustomAlert("অনুগ্রহ করে সঠিক মোবাইল নাম্বার দিন।");
+                return;
+            }
+
+            // Demo testing
+            if (phone === "01700000000" || phone === "01800000000") {
+                localStorage.setItem("phone", phone);
+                localStorage.setItem("isLoggedIn", true);
+                if (!localStorage.getItem('29card_profile')) {
+                    window.location.href = "name_setup.html";
+                } else {
+                    window.location.href = "../index.html";
+                }
+                return;
+            }
+
+            btn.style.display = "none";
+            loader.style.display = "block";
+
+            try {
+                const res = await fetch("send_otp.php", {
+                    method: "POST",
+                    body: new URLSearchParams({ user_mobile: phone })
+                });
+
+                const data = await res.json();
+
+                if (data.success) {
+                    localStorage.setItem("phone", phone);
+                    localStorage.setItem("ref", data.referenceNo);
+                    window.location.href = "otp.html";
+                } else if (
+                    data.statusCode === 'E1351' || 
+                    (data.statusDetail && data.statusDetail.toLowerCase().includes("already")) ||
+                    (data.message && data.message.toLowerCase().includes("already"))
+                ) {
+                    localStorage.setItem("phone", phone);
+                    localStorage.setItem("isLoggedIn", true);
+                    if (!localStorage.getItem('29card_profile')) {
+                        window.location.href = "name_setup.html";
+                    } else {
+                        window.location.href = "../index.html";
+                    }
+                } else {
+                    showCustomAlert(data.message || "OTP failed. Try again.");
+                    btn.style.display = "block";
+                    loader.style.display = "none";
+                }
+
+            } catch (e) {
+                showCustomAlert("Network error");
+                btn.style.display = "block";
+                loader.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

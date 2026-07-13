@@ -1,0 +1,3302 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>২৯ কার্ড গেম - Premium UI/UX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ========== DESIGN SYSTEM ========== */
+        :root {
+            /* Colors */
+            --bg-primary: #060e06;
+            --bg-secondary: #0a1a0d;
+            --bg-tertiary: #0f2613;
+            --bg-card: rgba(15, 38, 19, 0.6);
+            --bg-glass: rgba(15, 38, 19, 0.45);
+            --bg-glass-light: rgba(25, 55, 30, 0.35);
+            --bg-overlay: rgba(0, 0, 0, 0.85);
+
+            --gold-primary: #d4a843;
+            --gold-light: #f0d078;
+            --gold-dark: #a07830;
+            --gold-gradient: linear-gradient(135deg, #f0d078 0%, #d4a843 30%, #a07830 70%, #d4a843 100%);
+            --gold-gradient-btn: linear-gradient(135deg, #d4a843 0%, #f0d078 50%, #d4a843 100%);
+            --gold-text-gradient: linear-gradient(135deg, #f0d078, #d4a843, #f0d078);
+
+            --green-primary: #1a5c2a;
+            --green-light: #2a8c3e;
+            --green-dark: #0d3315;
+            --green-glow: rgba(42, 140, 62, 0.3);
+            --green-felt: #1a5c2a;
+
+            --text-primary: #f0ead6;
+            --text-secondary: rgba(240, 234, 214, 0.7);
+            --text-muted: rgba(240, 234, 214, 0.45);
+
+            --red-accent: #e74c3c;
+            --blue-accent: #3498db;
+            --purple-accent: #9b59b6;
+
+            --border-gold: rgba(212, 168, 67, 0.3);
+            --border-glass: rgba(255, 255, 255, 0.08);
+
+            --shadow-gold: 0 0 20px rgba(212, 168, 67, 0.15);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-btn: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+            /* Typography */
+            --font-bengali: 'Noto Sans Bengali', sans-serif;
+            --font-english: 'Outfit', 'Inter', sans-serif;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+
+            /* Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 24px;
+            --radius-full: 50%;
+
+            /* Phone dimensions */
+            --phone-width: 393px;
+            --phone-height: 852px;
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-bengali);
+            background: #111;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ========== NAVIGATION BAR (Screen Selector) ========== */
+        .screen-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 30px;
+            max-width: 1200px;
+        }
+
+        .screen-nav button {
+            font-family: var(--font-bengali);
+            background: rgba(15, 38, 19, 0.8);
+            border: 1px solid var(--border-gold);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .screen-nav button:hover,
+        .screen-nav button.active {
+            background: rgba(212, 168, 67, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* ========== PHONE FRAME ========== */
+        .phone-frame {
+            width: var(--phone-width);
+            height: var(--phone-height);
+            background: var(--bg-primary);
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(212, 168, 67, 0.2);
+            box-shadow: 0 0 60px rgba(212, 168, 67, 0.1), 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 28px;
+            background: #000;
+            border-radius: 0 0 16px 16px;
+            z-index: 100;
+        }
+
+        /* ========== SCREEN BASE ========== */
+        .screen {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background: var(--bg-primary);
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .screen::-webkit-scrollbar {
+            width: 0;
+        }
+
+        /* ========== GLASSMORPHISM ========== */
+        .glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+        }
+
+        .glass-gold {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-lg);
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn-gold {
+            background: var(--gold-gradient-btn);
+            color: #1a0f00;
+            border: none;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-bengali);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 168, 67, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-gold:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        .btn-glass {
+            background: var(--bg-glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-gold);
+            color: var(--text-primary);
+            padding: 16px 24px;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-bengali);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            width: 100%;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212, 168, 67, 0.3), transparent);
+        }
+
+        .btn-glass:hover {
+            border-color: var(--gold-primary);
+            background: rgba(212, 168, 67, 0.1);
+            box-shadow: 0 0 30px rgba(212, 168, 67, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-glass .icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(212, 168, 67, 0.12);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .btn-glass .btn-text {
+            flex: 1;
+        }
+
+        .btn-glass .btn-text span {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .btn-glass .arrow {
+            color: var(--gold-primary);
+            font-size: 18px;
+            opacity: 0.6;
+        }
+
+        /* ========== 1. SPLASH SCREEN ========== */
+        #splash {
+            background: radial-gradient(ellipse at center, var(--bg-tertiary) 0%, var(--bg-primary) 70%);
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .splash-bg-cards {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.06;
+        }
+
+        .splash-bg-cards .card-bg {
+            position: absolute;
+            font-size: 80px;
+            color: var(--gold-primary);
+        }
+
+        .splash-bg-cards .card-bg:nth-child(1) { top: 10%; left: -5%; transform: rotate(-25deg); }
+        .splash-bg-cards .card-bg:nth-child(2) { top: 5%; right: -5%; transform: rotate(20deg); }
+        .splash-bg-cards .card-bg:nth-child(3) { bottom: 15%; left: 5%; transform: rotate(15deg); }
+        .splash-bg-cards .card-bg:nth-child(4) { bottom: 10%; right: 0; transform: rotate(-10deg); }
+
+        .splash-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .splash-logo {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .splash-cards-fan {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            height: 120px;
+        }
+
+        .splash-cards-fan .mini-card {
+            width: 60px;
+            height: 85px;
+            background: linear-gradient(145deg, #fff 0%, #f0ead6 100%);
+            border-radius: 6px;
+            position: absolute;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transform-origin: bottom center;
+            animation: fanIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .mini-card .suit-top {
+            font-size: 12px;
+            position: absolute;
+            top: 4px;
+            left: 6px;
+            font-weight: bold;
+        }
+
+        .mini-card .suit-center {
+            font-size: 28px;
+        }
+
+        .splash-cards-fan .mini-card:nth-child(1) { animation-delay: 0.2s; transform: rotate(-25deg) translateY(10px); color: #000; }
+        .splash-cards-fan .mini-card:nth-child(2) { animation-delay: 0.4s; transform: rotate(-10deg) translateY(0); color: #e74c3c; }
+        .splash-cards-fan .mini-card:nth-child(3) { animation-delay: 0.6s; transform: rotate(10deg) translateY(0); color: #e74c3c; }
+        .splash-cards-fan .mini-card:nth-child(4) { animation-delay: 0.8s; transform: rotate(25deg) translateY(10px); color: #000; }
+
+        @keyframes fanIn {
+            from { opacity: 0; transform: rotate(0) translateY(40px) scale(0.5); }
+            to { opacity: 1; }
+        }
+
+        .splash-title {
+            font-size: 48px;
+            font-weight: 900;
+            background: var(--gold-text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            filter: drop-shadow(0 2px 10px rgba(212, 168, 67, 0.3));
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .splash-subtitle {
+            font-size: 16px;
+            color: var(--gold-primary);
+            opacity: 0.7;
+            letter-spacing: 4px;
+            font-weight: 400;
+        }
+
+        .splash-loading {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            text-align: center;
+        }
+
+        .splash-loading-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(212, 168, 67, 0.15);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .splash-loading-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--gold-gradient);
+            border-radius: 2px;
+            animation: loadBar 2.5s ease-in-out infinite;
+        }
+
+        @keyframes loadBar {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        .splash-loading-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+        }
+
+        .splash-version {
+            position: absolute;
+            bottom: 40px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ========== 2. HOME SCREEN ========== */
+        #home {
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 40px 16px 12px;
+            gap: 10px;
+        }
+
+        .top-bar .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--gold-primary);
+            background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .avatar .level-badge {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            background: var(--gold-gradient);
+            color: #1a0f00;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-family: var(--font-english);
+        }
+
+        .top-bar .player-info {
+            flex: 1;
+        }
+
+        .top-bar .player-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        .top-bar .player-level {
+            font-size: 11px;
+            color: var(--gold-primary);
+            font-weight: 500;
+        }
+
+        .top-bar .coins {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(212, 168, 67, 0.1);
+            border: 1px solid rgba(212, 168, 67, 0.25);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: var(--font-english);
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--gold-light);
+        }
+
+        .coins .coin-icon {
+            font-size: 16px;
+        }
+
+        .coins .plus-btn {
+            width: 18px;
+            height: 18px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a0f00;
+            font-size: 12px;
+            font-weight: 900;
+            margin-left: 4px;
+            cursor: pointer;
+        }
+
+        .top-bar .settings-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        /* Home Banner */
+        .home-banner {
+            margin: 8px 16px 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(26, 92, 42, 0.4), rgba(212, 168, 67, 0.15));
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-banner::before {
+            content: '🃏';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            opacity: 0.15;
+        }
+
+        .home-banner .banner-label {
+            font-size: 11px;
+            color: var(--gold-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .home-banner .banner-title {
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .home-banner .banner-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Home Menu Buttons */
+        .home-menu {
+            padding: 0 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 16px;
+            margin-top: 12px;
+        }
+
+        .quick-action-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-card:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
+        }
+
+        .quick-action-card .qa-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .quick-action-card .qa-label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .quick-action-card .qa-desc {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            padding: 8px 12px 20px;
+            background: rgba(6, 14, 6, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(212, 168, 67, 0.1);
+            margin-top: auto;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            padding: 6px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: var(--gold-primary);
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            width: 24px;
+            height: 2px;
+            background: var(--gold-primary);
+            border-radius: 2px;
+        }
+
+        .nav-item .nav-icon {
+            font-size: 22px;
+            opacity: 0.5;
+        }
+
+        .nav-item.active .nav-icon {
+            opacity: 1;
+        }
+
+        .nav-item .nav-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-item.active .nav-label {
+            color: var(--gold-primary);
+        }
+
+        /* ========== 3. ONLINE MATCH ========== */
+        .screen-header {
+            display: flex;
+            align-items: center;
+            padding: 44px 16px 14px;
+            gap: 12px;
+        }
+
+        .screen-header .back-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .screen-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .match-cards {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .match-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .match-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        }
+
+        .match-card:hover {
+            border-color: var(--border-gold);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .match-card .mc-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .match-card:nth-child(1) .mc-icon { background: linear-gradient(135deg, rgba(231, 76, 60, 0.2), rgba(231, 76, 60, 0.05)); }
+        .match-card:nth-child(2) .mc-icon { background: linear-gradient(135deg, rgba(212, 168, 67, 0.2), rgba(212, 168, 67, 0.05)); }
+        .match-card:nth-child(3) .mc-icon { background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(52, 152, 219, 0.05)); }
+        .match-card:nth-child(4) .mc-icon { background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(155, 89, 182, 0.05)); }
+
+        .match-card .mc-info {
+            flex: 1;
+        }
+
+        .match-card .mc-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .match-card .mc-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .match-card .mc-players {
+            font-size: 11px;
+            color: var(--green-light);
+            margin-top: 4px;
+        }
+
+        .match-card .mc-arrow {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Matchmaking */
+        .matchmaking-panel {
+            margin: 16px;
+            padding: 24px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-xl);
+            text-align: center;
+        }
+
+        .matchmaking-spinner {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(212, 168, 67, 0.1);
+            border-top-color: var(--gold-primary);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            animation: spin 1.2s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .matchmaking-panel .mm-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .matchmaking-panel .mm-time {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ========== 4. CREATE ROOM ========== */
+        .room-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 16px;
+            margin-bottom: 20px;
+        }
+
+        .room-type-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 20px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .room-type-card.active {
+            border-color: var(--gold-primary);
+            background: rgba(212, 168, 67, 0.1);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .room-type-card .rt-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .room-type-card .rt-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            padding: 0 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-bengali);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .pill-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .pill {
+            flex: 1;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            font-family: var(--font-bengali);
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .pill.active {
+            background: rgba(212, 168, 67, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .room-code-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 16px;
+            margin-bottom: 20px;
+        }
+
+        .room-code-box {
+            flex: 1;
+            padding: 14px;
+            background: rgba(212, 168, 67, 0.08);
+            border: 1px dashed var(--border-gold);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-family: var(--font-english);
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 8px;
+            color: var(--gold-light);
+        }
+
+        .copy-btn {
+            padding: 14px;
+            background: rgba(212, 168, 67, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--gold-primary);
+        }
+
+        .section-divider {
+            padding: 0 16px;
+            margin: 8px 0 16px;
+        }
+
+        .section-divider .divider-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+        }
+
+        .btn-container {
+            padding: 16px;
+            margin-top: auto;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        /* ========== 5. JOIN ROOM ========== */
+        .code-input-group {
+            display: flex;
+            gap: 8px;
+            padding: 0 16px;
+            margin-bottom: 24px;
+        }
+
+        .code-digit {
+            flex: 1;
+            height: 56px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-family: var(--font-english);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold-light);
+            outline: none;
+        }
+
+        .code-digit:focus {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 10px rgba(212, 168, 67, 0.2);
+        }
+
+        .recent-rooms {
+            padding: 0 16px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .room-list-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            gap: 12px;
+        }
+
+        .room-list-item:hover {
+            border-color: var(--border-gold);
+        }
+
+        .room-list-item .rli-icon {
+            font-size: 20px;
+        }
+
+        .room-list-item .rli-info {
+            flex: 1;
+        }
+
+        .room-list-item .rli-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .room-list-item .rli-detail {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .room-list-item .rli-players {
+            font-size: 12px;
+            color: var(--green-light);
+        }
+
+        /* ========== 7. BOT MODE ========== */
+        .bot-avatar-section {
+            text-align: center;
+            padding: 20px 16px;
+        }
+
+        .bot-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.15), rgba(155, 89, 182, 0.15));
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            position: relative;
+            animation: botFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes botFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .bot-avatar::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border: 1px solid rgba(52, 152, 219, 0.15);
+            border-radius: 50%;
+            animation: botRing 2s linear infinite;
+        }
+
+        @keyframes botRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .bot-name {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .bot-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .difficulty-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0 16px;
+            margin-top: 20px;
+        }
+
+        .diff-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 20px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .diff-card:hover, .diff-card.active {
+            border-color: var(--gold-primary);
+            background: rgba(212, 168, 67, 0.08);
+        }
+
+        .diff-card .diff-emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .diff-card .diff-label {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .diff-card .diff-stars {
+            margin-top: 6px;
+            color: var(--gold-primary);
+            font-size: 12px;
+        }
+
+        /* ========== 8. LOCAL MULTIPLAYER ========== */
+        .local-modes {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .local-mode-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 24px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .local-mode-card:hover {
+            border-color: var(--border-gold);
+            transform: translateX(4px);
+        }
+
+        .local-mode-card .lm-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: rgba(212, 168, 67, 0.08);
+            flex-shrink: 0;
+        }
+
+        .local-mode-card .lm-info { flex: 1; }
+        .local-mode-card .lm-title { font-size: 16px; font-weight: 700; }
+        .local-mode-card .lm-desc { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+        /* ========== 9. GAMEPLAY SCREEN ========== */
+        #gameplay {
+            background: radial-gradient(ellipse at center, #1a3d20 0%, #0a1a0d 50%, #060e06 100%);
+            overflow: hidden;
+        }
+
+        .game-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 12px 8px;
+            z-index: 10;
+        }
+
+        .game-scores {
+            display: flex;
+            gap: 8px;
+        }
+
+        .score-chip {
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-english);
+        }
+
+        .score-chip.team-a {
+            background: rgba(46, 204, 113, 0.15);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            color: #2ecc71;
+        }
+
+        .score-chip.team-b {
+            background: rgba(231, 76, 60, 0.15);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+
+        .game-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .game-action-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Table */
+        .game-table {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .table-felt {
+            width: 320px;
+            height: 220px;
+            background: radial-gradient(ellipse, #1e5c2e 0%, #14452a 50%, #0d3315 100%);
+            border-radius: 50%;
+            border: 4px solid #3d2b10;
+            box-shadow: 0 0 0 8px #2a1c08, 0 0 0 10px rgba(212, 168, 67, 0.15), inset 0 0 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        /* Players */
+        .player-seat {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .player-avatar-game {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 168, 67, 0.4);
+            background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            position: relative;
+        }
+
+        .player-avatar-game.active-turn {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 0 2px rgba(212, 168, 67, 0.3);
+        }
+
+        .player-avatar-game .timer-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--gold-primary);
+            animation: spin 3s linear infinite;
+        }
+
+        .player-name-game {
+            font-size: 10px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            background: rgba(0,0,0,0.5);
+            padding: 2px 8px;
+            border-radius: 8px;
+        }
+
+        .player-seat.bottom { bottom: -60px; left: 50%; transform: translateX(-50%); }
+        .player-seat.top { top: -60px; left: 50%; transform: translateX(-50%); }
+        .player-seat.left { left: -50px; top: 50%; transform: translateY(-50%); }
+        .player-seat.right { right: -50px; top: 50%; transform: translateY(-50%); }
+
+        .dealer-badge {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 16px;
+            height: 16px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            font-size: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a0f00;
+            font-weight: 900;
+        }
+
+        /* Trick area */
+        .trick-area {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .trick-card {
+            width: 40px;
+            height: 56px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .trick-card:nth-child(1) { transform: translate(-20px, -10px) rotate(-5deg); color: #e74c3c; }
+        .trick-card:nth-child(2) { transform: translate(10px, -15px) rotate(8deg); color: #000; }
+        .trick-card:nth-child(3) { transform: translate(5px, 10px) rotate(-3deg); color: #e74c3c; }
+
+        /* Trump indicator */
+        .trump-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trump-indicator .trump-label {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .trump-indicator .trump-suit {
+            font-size: 18px;
+        }
+
+        /* Bid panel */
+        .bid-panel {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            padding: 6px 10px;
+        }
+
+        .bid-panel .bid-label {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .bid-panel .bid-value {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--gold-light);
+            font-family: var(--font-english);
+        }
+
+        /* Player hand */
+        .player-hand {
+            padding: 10px 16px 20px;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hand-card {
+            width: 52px;
+            height: 74px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            margin-left: -16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hand-card:first-child {
+            margin-left: 0;
+        }
+
+        .hand-card:hover {
+            transform: translateY(-16px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            z-index: 5;
+        }
+
+        .hand-card .hc-rank {
+            font-size: 12px;
+            font-weight: 900;
+            position: absolute;
+            top: 3px;
+            left: 5px;
+        }
+
+        .hand-card .hc-suit {
+            font-size: 22px;
+        }
+
+        .hand-card.red { color: #e74c3c; }
+        .hand-card.black { color: #1a1a1a; }
+
+        /* Game bottom bar */
+        .game-bottom-bar {
+            display: flex;
+            gap: 8px;
+            padding: 8px 16px 24px;
+            justify-content: center;
+        }
+
+        .game-btn {
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-bengali);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .game-btn.primary {
+            background: var(--gold-gradient-btn);
+            color: #1a0f00;
+        }
+
+        .game-btn.secondary {
+            background: rgba(255,255,255,0.08);
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* ========== 10. MATCH RESULT ========== */
+        #result {
+            background: radial-gradient(ellipse at center top, rgba(212, 168, 67, 0.1), var(--bg-primary) 60%);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .result-trophy {
+            font-size: 80px;
+            margin-bottom: 16px;
+            animation: trophyBounce 1s ease-out;
+        }
+
+        @keyframes trophyBounce {
+            0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+            60% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .result-title {
+            font-size: 28px;
+            font-weight: 900;
+            background: var(--gold-text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .result-score {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .result-rewards {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .reward-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        .reward-item .reward-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .reward-item .reward-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold-light);
+            font-family: var(--font-english);
+        }
+
+        .reward-item .reward-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .result-rank-change {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 32px;
+            color: #2ecc71;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .result-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 80%;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            color: var(--gold-primary);
+            padding: 14px 24px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-bengali);
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 168, 67, 0.1);
+        }
+
+        /* ========== 11. PROFILE ========== */
+        .profile-header {
+            text-align: center;
+            padding: 50px 16px 24px;
+            background: linear-gradient(180deg, rgba(26, 92, 42, 0.2), transparent);
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--gold-primary);
+            margin: 0 auto 12px;
+            background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(212, 168, 67, 0.2);
+        }
+
+        .profile-avatar .profile-level {
+            position: absolute;
+            bottom: -6px;
+            background: var(--gold-gradient);
+            color: #1a0f00;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 2px 12px;
+            border-radius: 12px;
+            font-family: var(--font-english);
+        }
+
+        .profile-name {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .profile-id {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: var(--font-english);
+        }
+
+        .xp-bar {
+            margin: 16px 32px 0;
+            height: 6px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .xp-fill {
+            height: 100%;
+            width: 68%;
+            background: var(--gold-gradient);
+            border-radius: 3px;
+        }
+
+        .xp-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-align: center;
+            font-family: var(--font-english);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 20px 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 16px 12px;
+            text-align: center;
+        }
+
+        .stat-card .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gold-light);
+            font-family: var(--font-english);
+        }
+
+        .stat-card .stat-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .achievements-section {
+            padding: 0 16px;
+        }
+
+        .achievement-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 12px 0;
+        }
+
+        .achievement-badge {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(212, 168, 67, 0.1);
+            border: 2px solid var(--border-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .achievement-badge.locked {
+            opacity: 0.3;
+            border-color: var(--border-glass);
+        }
+
+        /* Match History */
+        .match-history {
+            padding: 0 16px;
+            margin-top: 8px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+            gap: 12px;
+        }
+
+        .history-item .hi-result {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            font-family: var(--font-english);
+        }
+
+        .hi-result.win {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        .hi-result.loss {
+            background: rgba(231, 76, 60, 0.15);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .history-item .hi-info { flex: 1; }
+        .history-item .hi-mode { font-size: 13px; font-weight: 600; }
+        .history-item .hi-date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+        .history-item .hi-score { font-size: 14px; font-weight: 700; color: var(--text-secondary); font-family: var(--font-english); }
+
+        /* ========== 12. LEADERBOARD ========== */
+        .leaderboard-tabs {
+            display: flex;
+            gap: 4px;
+            padding: 8px 16px;
+        }
+
+        .lb-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+            font-family: var(--font-bengali);
+            transition: all 0.3s;
+        }
+
+        .lb-tab.active {
+            color: var(--gold-primary);
+            border-bottom-color: var(--gold-primary);
+        }
+
+        .lb-top-three {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 12px;
+            padding: 20px 16px;
+        }
+
+        .lb-top-player {
+            text-align: center;
+            flex: 1;
+        }
+
+        .lb-top-player .ltp-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--border-gold);
+            background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 6px;
+            position: relative;
+        }
+
+        .lb-top-player:nth-child(2) .ltp-avatar {
+            width: 64px;
+            height: 64px;
+            border-color: var(--gold-primary);
+            border-width: 3px;
+            font-size: 28px;
+            box-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+        }
+
+        .lb-top-player .ltp-rank {
+            position: absolute;
+            bottom: -4px;
+            background: var(--gold-gradient);
+            color: #1a0f00;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-english);
+        }
+
+        .lb-top-player .ltp-name { font-size: 12px; font-weight: 600; }
+        .lb-top-player .ltp-score { font-size: 11px; color: var(--gold-primary); font-family: var(--font-english); }
+
+        .lb-list {
+            padding: 0 16px;
+        }
+
+        .lb-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 14px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+            gap: 12px;
+        }
+
+        .lb-item .lb-rank {
+            font-size: 14px;
+            font-weight: 800;
+            width: 28px;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: var(--font-english);
+        }
+
+        .lb-item .lb-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .lb-item .lb-info { flex: 1; }
+        .lb-item .lb-name { font-size: 14px; font-weight: 600; }
+        .lb-item .lb-wins { font-size: 11px; color: var(--text-muted); }
+        .lb-item .lb-pts { font-size: 14px; font-weight: 700; color: var(--gold-light); font-family: var(--font-english); }
+
+        /* ========== 13. STORE ========== */
+        .store-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 8px 16px;
+            overflow-x: auto;
+        }
+
+        .store-tab {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            font-family: var(--font-bengali);
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .store-tab.active {
+            background: rgba(212, 168, 67, 0.12);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .store-featured {
+            margin: 12px 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.2), rgba(52, 152, 219, 0.15));
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-featured::before {
+            content: '💎';
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 48px;
+            opacity: 0.3;
+        }
+
+        .store-featured .sf-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(155, 89, 182, 0.3);
+            border-radius: 10px;
+            font-size: 10px;
+            color: #c39bd3;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .store-featured .sf-title { font-size: 18px; font-weight: 800; }
+        .store-featured .sf-desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+        .store-featured .sf-price {
+            margin-top: 12px;
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--gold-gradient-btn);
+            color: #1a0f00;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 12px 16px;
+        }
+
+        .store-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .store-item:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-2px);
+        }
+
+        .store-item .si-icon { font-size: 36px; margin-bottom: 8px; }
+        .store-item .si-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .store-item .si-desc { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+
+        .store-item .si-price {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 16px;
+            background: rgba(212, 168, 67, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        /* ========== 14. SETTINGS ========== */
+        .settings-group {
+            padding: 0 16px;
+            margin-bottom: 16px;
+        }
+
+        .settings-group-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            margin-bottom: 4px;
+            gap: 12px;
+        }
+
+        .settings-item:first-child { border-radius: var(--radius-md) var(--radius-md) 4px 4px; }
+        .settings-item:last-child { border-radius: 4px 4px var(--radius-md) var(--radius-md); margin-bottom: 0; }
+        .settings-item:only-child { border-radius: var(--radius-md); }
+
+        .settings-item .si-icon {
+            font-size: 18px;
+            width: 32px;
+            text-align: center;
+        }
+
+        .settings-item .si-label {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle.on {
+            background: var(--green-primary);
+        }
+
+        .toggle::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .toggle.on::after {
+            transform: translateX(20px);
+        }
+
+        .settings-item .si-value {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .settings-item .si-arrow {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .btn-danger {
+            width: calc(100% - 32px);
+            margin: 16px auto;
+            display: block;
+            padding: 14px;
+            background: rgba(231, 76, 60, 0.12);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: var(--radius-md);
+            color: #e74c3c;
+            font-family: var(--font-bengali);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ========== 15. HOW TO PLAY ========== */
+        .tutorial-cards {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tutorial-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-card .tc-step {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            color: #1a0f00;
+            font-size: 14px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            font-family: var(--font-english);
+        }
+
+        .tutorial-card .tc-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .tutorial-card .tc-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .tutorial-card .tc-visual {
+            margin-top: 12px;
+            padding: 16px;
+            background: rgba(0,0,0,0.3);
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-size: 36px;
+            letter-spacing: 8px;
+        }
+
+        /* ========== 6. FRIEND INVITE ========== */
+        .friend-invite-section {
+            padding: 0 16px;
+        }
+
+        .share-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 0 16px;
+            margin-bottom: 20px;
+        }
+
+        .share-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 8px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .share-btn:hover {
+            border-color: var(--border-gold);
+        }
+
+        .share-btn .sb-icon {
+            font-size: 24px;
+        }
+
+        .share-btn .sb-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .friend-list {
+            padding: 0 16px;
+        }
+
+        .friend-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            gap: 12px;
+        }
+
+        .friend-item .fi-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-dark), var(--green-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border: 1px solid var(--border-gold);
+            position: relative;
+        }
+
+        .fi-avatar .online-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border: 2px solid var(--bg-primary);
+            border-radius: 50%;
+        }
+
+        .friend-item .fi-info { flex: 1; }
+        .friend-item .fi-name { font-size: 14px; font-weight: 600; }
+        .friend-item .fi-status { font-size: 11px; color: #2ecc71; }
+
+        .friend-item .fi-invite-btn {
+            padding: 7px 16px;
+            background: rgba(212, 168, 67, 0.12);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius-md);
+            color: var(--gold-primary);
+            font-family: var(--font-bengali);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .friend-item .fi-invite-btn:hover {
+            background: var(--gold-gradient-btn);
+            color: #1a0f00;
+        }
+
+        /* ========== UTILITY ========== */
+        .screen-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 16px;
+        }
+
+        /* Particles animation */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold-primary);
+            border-radius: 50%;
+            opacity: 0;
+            animation: floatParticle 4s ease-in-out infinite;
+        }
+
+        @keyframes floatParticle {
+            0% { opacity: 0; transform: translateY(100px) scale(0); }
+            30% { opacity: 0.6; }
+            70% { opacity: 0.3; }
+            100% { opacity: 0; transform: translateY(-200px) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Screen Navigation -->
+    <div class="screen-nav" id="screenNav">
+        <button class="active" onclick="showScreen('splash')">স্প্ল্যাশ</button>
+        <button onclick="showScreen('home')">হোম</button>
+        <button onclick="showScreen('online')">অনলাইন ম্যাচ</button>
+        <button onclick="showScreen('createRoom')">রুম তৈরি</button>
+        <button onclick="showScreen('joinRoom')">রুম জয়েন</button>
+        <button onclick="showScreen('friendInvite')">বন্ধু আমন্ত্রণ</button>
+        <button onclick="showScreen('botMode')">বট মোড</button>
+        <button onclick="showScreen('localMulti')">লোকাল মাল্টি</button>
+        <button onclick="showScreen('gameplay')">গেমপ্লে</button>
+        <button onclick="showScreen('result')">ম্যাচ রেজাল্ট</button>
+        <button onclick="showScreen('profile')">প্রোফাইল</button>
+        <button onclick="showScreen('leaderboard')">লিডারবোর্ড</button>
+        <button onclick="showScreen('store')">দোকান</button>
+        <button onclick="showScreen('settings')">সেটিংস</button>
+        <button onclick="showScreen('howToPlay')">কিভাবে খেলবেন</button>
+    </div>
+
+    <!-- Phone Frame -->
+    <div class="phone-frame">
+
+        <!-- 1. SPLASH SCREEN -->
+        <div class="screen active" id="splash">
+            <div class="splash-bg-cards">
+                <div class="card-bg">♠</div>
+                <div class="card-bg">♥</div>
+                <div class="card-bg">♦</div>
+                <div class="card-bg">♣</div>
+            </div>
+            <div class="particles">
+                <div class="particle" style="left:20%;animation-delay:0s"></div>
+                <div class="particle" style="left:40%;animation-delay:1s"></div>
+                <div class="particle" style="left:60%;animation-delay:2s"></div>
+                <div class="particle" style="left:80%;animation-delay:0.5s"></div>
+                <div class="particle" style="left:30%;animation-delay:1.5s"></div>
+                <div class="particle" style="left:70%;animation-delay:2.5s"></div>
+            </div>
+            <div class="splash-glow"></div>
+            <div class="splash-logo">
+                <div class="splash-cards-fan">
+                    <div class="mini-card"><span class="suit-top">A</span><span class="suit-center">♠</span></div>
+                    <div class="mini-card"><span class="suit-top">K</span><span class="suit-center">♥</span></div>
+                    <div class="mini-card"><span class="suit-top">Q</span><span class="suit-center">♦</span></div>
+                    <div class="mini-card"><span class="suit-top">J</span><span class="suit-center">♣</span></div>
+                </div>
+                <div class="splash-title">২৯ কার্ড গেম</div>
+                <div class="splash-subtitle">CARD GAME</div>
+            </div>
+            <div class="splash-loading">
+                <div class="splash-loading-bar">
+                    <div class="splash-loading-fill"></div>
+                </div>
+                <div class="splash-loading-text">লোড হচ্ছে...</div>
+            </div>
+            <div class="splash-version">v1.0.0</div>
+        </div>
+
+        <!-- 2. HOME SCREEN -->
+        <div class="screen" id="home">
+            <div class="top-bar">
+                <div class="avatar">
+                    👤
+                    <div class="level-badge">25</div>
+                </div>
+                <div class="player-info">
+                    <div class="player-name">তারেক</div>
+                    <div class="player-level">লেভেল ২৫ • গোল্ড</div>
+                </div>
+                <div class="coins">
+                    <span class="coin-icon">🪙</span>
+                    <span>5,250</span>
+                    <span class="plus-btn">+</span>
+                </div>
+                <div class="settings-btn" onclick="showScreen('settings')">⚙️</div>
+            </div>
+
+            <div class="home-banner">
+                <div class="banner-label">🔥 দৈনিক চ্যালেঞ্জ</div>
+                <div class="banner-title">আজকের টুর্নামেন্ট</div>
+                <div class="banner-desc">১০,০০০ কয়েন পুরস্কার জিতুন!</div>
+            </div>
+
+            <div class="home-menu">
+                <button class="btn-glass" onclick="showScreen('online')">
+                    <div class="icon">🌐</div>
+                    <div class="btn-text">অনলাইন খেলুন<span>বিশ্বজুড়ে খেলোয়াড়দের সাথে</span></div>
+                    <div class="arrow">›</div>
+                </button>
+                <button class="btn-glass" onclick="showScreen('createRoom')">
+                    <div class="icon">👥</div>
+                    <div class="btn-text">বন্ধুর সাথে খেলুন<span>প্রাইভেট রুম তৈরি করুন</span></div>
+                    <div class="arrow">›</div>
+                </button>
+                <button class="btn-glass" onclick="showScreen('botMode')">
+                    <div class="icon">🤖</div>
+                    <div class="btn-text">বটের সাথে খেলুন<span>AI এর বিরুদ্ধে অনুশীলন</span></div>
+                    <div class="arrow">›</div>
+                </button>
+                <button class="btn-glass" onclick="showScreen('localMulti')">
+                    <div class="icon">📱</div>
+                    <div class="btn-text">লোকাল মাল্টিপ্লেয়ার<span>একটি ডিভাইসে খেলুন</span></div>
+                    <div class="arrow">›</div>
+                </button>
+            </div>
+
+            <div class="quick-actions">
+                <div class="quick-action-card" onclick="showScreen('howToPlay')">
+                    <div class="qa-icon">📖</div>
+                    <div class="qa-label">কিভাবে খেলবেন</div>
+                    <div class="qa-desc">নিয়মাবলী শিখুন</div>
+                </div>
+                <div class="quick-action-card">
+                    <div class="qa-icon">🎁</div>
+                    <div class="qa-label">দৈনিক পুরস্কার</div>
+                    <div class="qa-desc">ফ্রি কয়েন নিন</div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item active">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">হোম</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('leaderboard')">
+                    <div class="nav-icon">🏆</div>
+                    <div class="nav-label">লিডারবোর্ড</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('store')">
+                    <div class="nav-icon">🛍️</div>
+                    <div class="nav-label">দোকান</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('profile')">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">প্রোফাইল</div>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon">⋯</div>
+                    <div class="nav-label">আরও</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. ONLINE MATCH -->
+        <div class="screen" id="online">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>অনলাইন খেলুন</h2>
+            </div>
+            <div class="screen-content">
+                <div class="match-cards">
+                    <div class="match-card" onclick="showScreen('gameplay')">
+                        <div class="mc-icon">⚡</div>
+                        <div class="mc-info">
+                            <div class="mc-title">কুইক ম্যাচ</div>
+                            <div class="mc-desc">দ্রুত ম্যাচ খেলুন</div>
+                            <div class="mc-players">🟢 ১,২৪৫ জন অনলাইন</div>
+                        </div>
+                        <div class="mc-arrow">›</div>
+                    </div>
+                    <div class="match-card">
+                        <div class="mc-icon">🏆</div>
+                        <div class="mc-info">
+                            <div class="mc-title">র‍্যাঙ্কড ম্যাচ</div>
+                            <div class="mc-desc">র‍্যাঙ্ক বাড়ান ও পুরস্কার জিতুন</div>
+                            <div class="mc-players">🟢 ৮৭৬ জন অনলাইন</div>
+                        </div>
+                        <div class="mc-arrow">›</div>
+                    </div>
+                    <div class="match-card">
+                        <div class="mc-icon">🃏</div>
+                        <div class="mc-info">
+                            <div class="mc-title">ক্লাসিক ম্যাচ</div>
+                            <div class="mc-desc">পরিচিত ক্লাসিক ২৯ নিয়মে</div>
+                            <div class="mc-players">🟢 ৫৪৩ জন অনলাইন</div>
+                        </div>
+                        <div class="mc-arrow">›</div>
+                    </div>
+                    <div class="match-card">
+                        <div class="mc-icon">👑</div>
+                        <div class="mc-info">
+                            <div class="mc-title">টুর্নামেন্ট</div>
+                            <div class="mc-desc">বড় পুরস্কারের জন্য প্রতিযোগিতা</div>
+                            <div class="mc-players">🟢 ৩২১ জন অনলাইন</div>
+                        </div>
+                        <div class="mc-arrow">›</div>
+                    </div>
+                </div>
+
+                <div class="matchmaking-panel">
+                    <div class="matchmaking-spinner"></div>
+                    <div class="mm-text">প্রতিপক্ষ খোঁজা হচ্ছে...</div>
+                    <div class="mm-time">আনুমানিক সময়: ১০ সেকেন্ড</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. CREATE ROOM -->
+        <div class="screen" id="createRoom">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>রুম তৈরি করুন</h2>
+            </div>
+            <div class="screen-content">
+                <div class="room-type-selector">
+                    <div class="room-type-card active">
+                        <div class="rt-icon">🔒</div>
+                        <div class="rt-label">প্রাইভেট রুম</div>
+                    </div>
+                    <div class="room-type-card">
+                        <div class="rt-icon">🌍</div>
+                        <div class="rt-label">পাবলিক রুম</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">রুমের নাম</label>
+                    <input class="form-input" type="text" placeholder="আপনার রুমের নাম দিন..." value="তারেকের রুম">
+                </div>
+
+                <div class="section-title" style="padding:0 16px;margin-bottom:8px">📋 রুম কোড</div>
+                <div class="room-code-display">
+                    <div class="room-code-box">A7X2K9</div>
+                    <div class="copy-btn">📋</div>
+                </div>
+
+                <div class="section-divider"><div class="divider-line"></div></div>
+
+                <div class="form-group">
+                    <label class="form-label">রাউন্ড সংখ্যা</label>
+                    <div class="pill-selector">
+                        <div class="pill active">Best of 3</div>
+                        <div class="pill">Best of 5</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">টার্গেট পয়েন্ট</label>
+                    <div class="pill-selector">
+                        <div class="pill">১৬</div>
+                        <div class="pill active">২৯</div>
+                        <div class="pill">৩২</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">এন্ট্রি কয়েন</label>
+                    <input class="form-input" type="text" placeholder="কয়েন পরিমাণ" value="🪙 100">
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn-gold btn-full" onclick="showScreen('friendInvite')">📩 বন্ধু আমন্ত্রণ করুন</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. JOIN ROOM -->
+        <div class="screen" id="joinRoom">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>রুমে জয়েন করুন</h2>
+            </div>
+            <div class="screen-content">
+                <div class="form-group">
+                    <label class="form-label">রুম কোড দিন</label>
+                </div>
+                <div class="code-input-group">
+                    <input class="code-digit" maxlength="1" value="A">
+                    <input class="code-digit" maxlength="1" value="7">
+                    <input class="code-digit" maxlength="1" value="X">
+                    <input class="code-digit" maxlength="1" value="2">
+                    <input class="code-digit" maxlength="1" value="K">
+                    <input class="code-digit" maxlength="1" value="9">
+                </div>
+                <div class="btn-container">
+                    <button class="btn-gold btn-full" onclick="showScreen('gameplay')">জয়েন করুন</button>
+                </div>
+
+                <div class="recent-rooms">
+                    <div class="section-title">🕐 সাম্প্রতিক রুমগুলো</div>
+                    <div class="room-list-item">
+                        <div class="rli-icon">🃏</div>
+                        <div class="rli-info">
+                            <div class="rli-name">রাকিবের রুম</div>
+                            <div class="rli-detail">কোড: B3Y5M1 • ৫ মিনিট আগে</div>
+                        </div>
+                        <div class="rli-players">2/4</div>
+                    </div>
+                    <div class="room-list-item">
+                        <div class="rli-icon">🃏</div>
+                        <div class="rli-info">
+                            <div class="rli-name">সুমনের রুম</div>
+                            <div class="rli-detail">কোড: K8P2Q7 • ১ ঘণ্টা আগে</div>
+                        </div>
+                        <div class="rli-players">3/4</div>
+                    </div>
+                    <div class="room-list-item">
+                        <div class="rli-icon">🃏</div>
+                        <div class="rli-info">
+                            <div class="rli-name">ফারহানের রুম</div>
+                            <div class="rli-detail">কোড: D5N8L3 • ২ ঘণ্টা আগে</div>
+                        </div>
+                        <div class="rli-players">1/4</div>
+                    </div>
+
+                    <div class="section-title" style="margin-top:20px">👥 বন্ধুদের রুম</div>
+                    <div class="room-list-item">
+                        <div class="rli-icon">👤</div>
+                        <div class="rli-info">
+                            <div class="rli-name">আরিফের রুম</div>
+                            <div class="rli-detail">🟢 চলমান • কোড: M4R7W2</div>
+                        </div>
+                        <div class="rli-players" style="color:var(--gold-primary)">জয়েন</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. FRIEND INVITE -->
+        <div class="screen" id="friendInvite">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('createRoom')">←</div>
+                <h2>বন্ধু আমন্ত্রণ</h2>
+            </div>
+            <div class="screen-content">
+                <div class="section-title" style="padding:0 16px">📤 শেয়ার করুন</div>
+                <div class="share-buttons">
+                    <div class="share-btn">
+                        <div class="sb-icon">💬</div>
+                        <div class="sb-label">WhatsApp</div>
+                    </div>
+                    <div class="share-btn">
+                        <div class="sb-icon">📱</div>
+                        <div class="sb-label">Messenger</div>
+                    </div>
+                    <div class="share-btn">
+                        <div class="sb-icon">🔗</div>
+                        <div class="sb-label">লিংক কপি</div>
+                    </div>
+                    <div class="share-btn">
+                        <div class="sb-icon">📤</div>
+                        <div class="sb-label">শেয়ার</div>
+                    </div>
+                </div>
+
+                <div class="section-title" style="padding:0 16px">🟢 অনলাইন বন্ধুরা</div>
+                <div class="friend-list">
+                    <div class="friend-item">
+                        <div class="fi-avatar">😎<div class="online-dot"></div></div>
+                        <div class="fi-info">
+                            <div class="fi-name">রাকিব হাসান</div>
+                            <div class="fi-status">অনলাইন</div>
+                        </div>
+                        <button class="fi-invite-btn">আমন্ত্রণ</button>
+                    </div>
+                    <div class="friend-item">
+                        <div class="fi-avatar">🧑<div class="online-dot"></div></div>
+                        <div class="fi-info">
+                            <div class="fi-name">সুমন আহমেদ</div>
+                            <div class="fi-status">অনলাইন</div>
+                        </div>
+                        <button class="fi-invite-btn">আমন্ত্রণ</button>
+                    </div>
+                    <div class="friend-item">
+                        <div class="fi-avatar">😊<div class="online-dot"></div></div>
+                        <div class="fi-info">
+                            <div class="fi-name">ফারহান খান</div>
+                            <div class="fi-status">অনলাইন</div>
+                        </div>
+                        <button class="fi-invite-btn">আমন্ত্রণ</button>
+                    </div>
+                    <div class="friend-item">
+                        <div class="fi-avatar">🤓<div class="online-dot"></div></div>
+                        <div class="fi-info">
+                            <div class="fi-name">আরিফ হোসেন</div>
+                            <div class="fi-status">অনলাইন</div>
+                        </div>
+                        <button class="fi-invite-btn">আমন্ত্রণ</button>
+                    </div>
+                    <div class="friend-item">
+                        <div class="fi-avatar">🙂</div>
+                        <div class="fi-info">
+                            <div class="fi-name">কামাল মিয়া</div>
+                            <div class="fi-status" style="color:var(--text-muted)">অফলাইন • ২ ঘণ্টা আগে</div>
+                        </div>
+                        <button class="fi-invite-btn" style="opacity:0.4">আমন্ত্রণ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. BOT MODE -->
+        <div class="screen" id="botMode">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>বটের সাথে খেলুন</h2>
+            </div>
+            <div class="screen-content">
+                <div class="bot-avatar-section">
+                    <div class="bot-avatar">🤖</div>
+                    <div class="bot-name">AI বট</div>
+                    <div class="bot-desc">কঠিনতা নির্বাচন করুন</div>
+                </div>
+
+                <div class="section-title" style="padding:0 16px">🎯 কঠিনতার মাত্রা</div>
+                <div class="difficulty-grid">
+                    <div class="diff-card">
+                        <div class="diff-emoji">😊</div>
+                        <div class="diff-label">সহজ</div>
+                        <div class="diff-stars">⭐</div>
+                    </div>
+                    <div class="diff-card active">
+                        <div class="diff-emoji">🤔</div>
+                        <div class="diff-label">মাঝারি</div>
+                        <div class="diff-stars">⭐⭐</div>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-emoji">😈</div>
+                        <div class="diff-label">কঠিন</div>
+                        <div class="diff-stars">⭐⭐⭐</div>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-emoji">🧠</div>
+                        <div class="diff-label">এক্সপার্ট</div>
+                        <div class="diff-stars">⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+
+                <div class="btn-container">
+                    <button class="btn-gold btn-full" onclick="showScreen('gameplay')">🎮 খেলা শুরু করুন</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. LOCAL MULTIPLAYER -->
+        <div class="screen" id="localMulti">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>লোকাল মাল্টিপ্লেয়ার</h2>
+            </div>
+            <div class="screen-content">
+                <div class="local-modes">
+                    <div class="local-mode-card" onclick="showScreen('gameplay')">
+                        <div class="lm-icon">🔄</div>
+                        <div class="lm-info">
+                            <div class="lm-title">পাস & প্লে মোড</div>
+                            <div class="lm-desc">পালা করে একটি ডিভাইসে খেলুন</div>
+                        </div>
+                    </div>
+                    <div class="local-mode-card">
+                        <div class="lm-icon">⚔️</div>
+                        <div class="lm-info">
+                            <div class="lm-title">২ বনাম ২</div>
+                            <div class="lm-desc">দুই টিমে ভাগ হয়ে খেলুন</div>
+                        </div>
+                    </div>
+                    <div class="local-mode-card">
+                        <div class="lm-icon">📱</div>
+                        <div class="lm-info">
+                            <div class="lm-title">সিঙ্গেল ডিভাইস</div>
+                            <div class="lm-desc">একটি ফোনে সবাই খেলুন</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding:16px;text-align:center;margin-top:20px">
+                    <div style="font-size:48px;margin-bottom:12px">📱</div>
+                    <div style="font-size:14px;color:var(--text-secondary)">আপনার বন্ধুদের সাথে একটি ডিভাইসে ২৯ কার্ড খেলুন!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. GAMEPLAY SCREEN -->
+        <div class="screen" id="gameplay">
+            <div class="game-top-bar">
+                <div class="game-scores">
+                    <div class="score-chip team-a">আমরা: 12</div>
+                    <div class="score-chip team-b">ওরা: 8</div>
+                </div>
+                <div class="game-actions">
+                    <div class="game-action-btn">💬</div>
+                    <div class="game-action-btn">😀</div>
+                    <div class="game-action-btn">🎤</div>
+                    <div class="game-action-btn" onclick="showScreen('home')">⚙️</div>
+                </div>
+            </div>
+
+            <div class="game-table">
+                <div class="trump-indicator">
+                    <span class="trump-label">ট্রাম্প</span>
+                    <span class="trump-suit">♥️</span>
+                </div>
+
+                <div class="bid-panel">
+                    <div class="bid-label">বিড</div>
+                    <div class="bid-value">17</div>
+                </div>
+
+                <div class="table-felt">
+                    <!-- Top player -->
+                    <div class="player-seat top">
+                        <div class="player-avatar-game">😠</div>
+                        <div class="player-name-game">প্রতিপক্ষ ১</div>
+                    </div>
+                    <!-- Left player -->
+                    <div class="player-seat left">
+                        <div class="player-avatar-game" style="border-color: #2ecc71;">
+                            😎
+                            <div class="dealer-badge">D</div>
+                        </div>
+                        <div class="player-name-game">পার্টনার</div>
+                    </div>
+                    <!-- Right player -->
+                    <div class="player-seat right">
+                        <div class="player-avatar-game">🤨</div>
+                        <div class="player-name-game">প্রতিপক্ষ ২</div>
+                    </div>
+                    <!-- Bottom player (You) -->
+                    <div class="player-seat bottom">
+                        <div class="player-avatar-game active-turn">
+                            👤
+                            <div class="timer-ring"></div>
+                        </div>
+                        <div class="player-name-game" style="color:var(--gold-light)">আপনি</div>
+                    </div>
+
+                    <!-- Trick area -->
+                    <div class="trick-area">
+                        <div class="trick-card">♥️</div>
+                        <div class="trick-card">♠</div>
+                        <div class="trick-card">♦️</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player's hand -->
+            <div class="player-hand">
+                <div class="hand-card red"><span class="hc-rank">J</span><span class="hc-suit">♥</span></div>
+                <div class="hand-card black"><span class="hc-rank">9</span><span class="hc-suit">♠</span></div>
+                <div class="hand-card red"><span class="hc-rank">A</span><span class="hc-suit">♦</span></div>
+                <div class="hand-card black"><span class="hc-rank">10</span><span class="hc-suit">♣</span></div>
+                <div class="hand-card red"><span class="hc-rank">K</span><span class="hc-suit">♥</span></div>
+                <div class="hand-card black"><span class="hc-rank">Q</span><span class="hc-suit">♠</span></div>
+                <div class="hand-card red"><span class="hc-rank">J</span><span class="hc-suit">♦</span></div>
+                <div class="hand-card black"><span class="hc-rank">9</span><span class="hc-suit">♣</span></div>
+            </div>
+
+            <div class="game-bottom-bar">
+                <button class="game-btn secondary">পাস</button>
+                <button class="game-btn primary">🃏 কার্ড দিন</button>
+                <button class="game-btn secondary">ট্রাম্প দেখান</button>
+            </div>
+        </div>
+
+        <!-- 10. MATCH RESULT -->
+        <div class="screen" id="result">
+            <div class="particles">
+                <div class="particle" style="left:15%;animation-delay:0.2s"></div>
+                <div class="particle" style="left:35%;animation-delay:0.8s"></div>
+                <div class="particle" style="left:55%;animation-delay:0.4s"></div>
+                <div class="particle" style="left:75%;animation-delay:1.2s"></div>
+                <div class="particle" style="left:25%;animation-delay:1.6s"></div>
+                <div class="particle" style="left:85%;animation-delay:0.6s"></div>
+            </div>
+            <div class="result-trophy">🏆</div>
+            <div class="result-title">বিজয়ী!</div>
+            <div class="result-score">২৯ - ১৮ পয়েন্ট</div>
+
+            <div class="result-rewards">
+                <div class="reward-item">
+                    <div class="reward-icon">🪙</div>
+                    <div class="reward-value">+250</div>
+                    <div class="reward-label">কয়েন</div>
+                </div>
+                <div class="reward-item">
+                    <div class="reward-icon">⭐</div>
+                    <div class="reward-value">+120</div>
+                    <div class="reward-label">XP</div>
+                </div>
+                <div class="reward-item">
+                    <div class="reward-icon">📈</div>
+                    <div class="reward-value">+15</div>
+                    <div class="reward-label">র‍্যাঙ্ক</div>
+                </div>
+            </div>
+
+            <div class="result-rank-change">
+                ▲ গোল্ড III → গোল্ড II
+            </div>
+
+            <div class="result-actions">
+                <button class="btn-gold btn-full" onclick="showScreen('gameplay')">🔄 আবার খেলুন</button>
+                <button class="btn-outline btn-full">📤 রেজাল্ট শেয়ার করুন</button>
+                <button class="btn-outline btn-full" onclick="showScreen('home')">🏠 হোমে যান</button>
+            </div>
+        </div>
+
+        <!-- 11. PROFILE -->
+        <div class="screen" id="profile">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    👤
+                    <div class="profile-level">Lv.25</div>
+                </div>
+                <div class="profile-name">তারেক রহমান</div>
+                <div class="profile-id">ID: #TRK29405</div>
+                <div class="xp-bar"><div class="xp-fill"></div></div>
+                <div class="xp-label">6,800 / 10,000 XP</div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">68%</div>
+                    <div class="stat-label">জয়ের হার</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">542</div>
+                    <div class="stat-label">মোট গেম</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">5,250</div>
+                    <div class="stat-label">🪙 কয়েন</div>
+                </div>
+            </div>
+
+            <div class="achievements-section">
+                <div class="section-title">🏅 অর্জনসমূহ</div>
+                <div class="achievement-row">
+                    <div class="achievement-badge">🥇</div>
+                    <div class="achievement-badge">🎯</div>
+                    <div class="achievement-badge">🔥</div>
+                    <div class="achievement-badge">💎</div>
+                    <div class="achievement-badge">⚡</div>
+                    <div class="achievement-badge locked">🌟</div>
+                    <div class="achievement-badge locked">👑</div>
+                </div>
+            </div>
+
+            <div class="match-history">
+                <div class="section-title">📊 ম্যাচ ইতিহাস</div>
+                <div class="history-item">
+                    <div class="hi-result win">W</div>
+                    <div class="hi-info">
+                        <div class="hi-mode">র‍্যাঙ্কড ম্যাচ</div>
+                        <div class="hi-date">আজ, ২:৩০ PM</div>
+                    </div>
+                    <div class="hi-score">29 - 18</div>
+                </div>
+                <div class="history-item">
+                    <div class="hi-result win">W</div>
+                    <div class="hi-info">
+                        <div class="hi-mode">কুইক ম্যাচ</div>
+                        <div class="hi-date">আজ, ১:১৫ PM</div>
+                    </div>
+                    <div class="hi-score">29 - 22</div>
+                </div>
+                <div class="history-item">
+                    <div class="hi-result loss">L</div>
+                    <div class="hi-info">
+                        <div class="hi-mode">টুর্নামেন্ট</div>
+                        <div class="hi-date">গতকাল, ১০:৪৫ PM</div>
+                    </div>
+                    <div class="hi-score">21 - 29</div>
+                </div>
+                <div class="history-item">
+                    <div class="hi-result win">W</div>
+                    <div class="hi-info">
+                        <div class="hi-mode">বট ম্যাচ</div>
+                        <div class="hi-date">গতকাল, ৮:২০ PM</div>
+                    </div>
+                    <div class="hi-score">29 - 15</div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('home')"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></div>
+                <div class="nav-item" onclick="showScreen('leaderboard')"><div class="nav-icon">🏆</div><div class="nav-label">লিডারবোর্ড</div></div>
+                <div class="nav-item" onclick="showScreen('store')"><div class="nav-icon">🛍️</div><div class="nav-label">দোকান</div></div>
+                <div class="nav-item active"><div class="nav-icon">👤</div><div class="nav-label">প্রোফাইল</div></div>
+                <div class="nav-item"><div class="nav-icon">⋯</div><div class="nav-label">আরও</div></div>
+            </div>
+        </div>
+
+        <!-- 12. LEADERBOARD -->
+        <div class="screen" id="leaderboard">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>লিডারবোর্ড</h2>
+            </div>
+            <div class="screen-content">
+                <div class="leaderboard-tabs">
+                    <button class="lb-tab active">গ্লোবাল</button>
+                    <button class="lb-tab">বাংলাদেশ</button>
+                    <button class="lb-tab">বন্ধু</button>
+                    <button class="lb-tab">সাপ্তাহিক</button>
+                </div>
+
+                <div class="lb-top-three">
+                    <div class="lb-top-player">
+                        <div class="ltp-avatar">🥈<div class="ltp-rank">2</div></div>
+                        <div class="ltp-name">রাহুল</div>
+                        <div class="ltp-score">12,450</div>
+                    </div>
+                    <div class="lb-top-player">
+                        <div class="ltp-avatar">👑<div class="ltp-rank">1</div></div>
+                        <div class="ltp-name">তানভীর</div>
+                        <div class="ltp-score">15,830</div>
+                    </div>
+                    <div class="lb-top-player">
+                        <div class="ltp-avatar">🥉<div class="ltp-rank">3</div></div>
+                        <div class="ltp-name">সাকিব</div>
+                        <div class="ltp-score">11,200</div>
+                    </div>
+                </div>
+
+                <div class="lb-list">
+                    <div class="lb-item">
+                        <div class="lb-rank">4</div>
+                        <div class="lb-avatar">😎</div>
+                        <div class="lb-info"><div class="lb-name">রাকিব হাসান</div><div class="lb-wins">৩৮৫ জয়</div></div>
+                        <div class="lb-pts">10,890</div>
+                    </div>
+                    <div class="lb-item">
+                        <div class="lb-rank">5</div>
+                        <div class="lb-avatar">🧑</div>
+                        <div class="lb-info"><div class="lb-name">সুমন আহমেদ</div><div class="lb-wins">৩৬০ জয়</div></div>
+                        <div class="lb-pts">10,450</div>
+                    </div>
+                    <div class="lb-item">
+                        <div class="lb-rank">6</div>
+                        <div class="lb-avatar">😊</div>
+                        <div class="lb-info"><div class="lb-name">ফারহান খান</div><div class="lb-wins">৩৪২ জয়</div></div>
+                        <div class="lb-pts">9,870</div>
+                    </div>
+                    <div class="lb-item" style="border-color:var(--gold-primary);background:rgba(212,168,67,0.08)">
+                        <div class="lb-rank" style="color:var(--gold-primary)">42</div>
+                        <div class="lb-avatar" style="border-color:var(--gold-primary)">👤</div>
+                        <div class="lb-info"><div class="lb-name" style="color:var(--gold-light)">তারেক (আপনি)</div><div class="lb-wins">৩৬৯ জয়</div></div>
+                        <div class="lb-pts">5,250</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('home')"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></div>
+                <div class="nav-item active"><div class="nav-icon">🏆</div><div class="nav-label">লিডারবোর্ড</div></div>
+                <div class="nav-item" onclick="showScreen('store')"><div class="nav-icon">🛍️</div><div class="nav-label">দোকান</div></div>
+                <div class="nav-item" onclick="showScreen('profile')"><div class="nav-icon">👤</div><div class="nav-label">প্রোফাইল</div></div>
+                <div class="nav-item"><div class="nav-icon">⋯</div><div class="nav-label">আরও</div></div>
+            </div>
+        </div>
+
+        <!-- 13. STORE -->
+        <div class="screen" id="store">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>দোকান</h2>
+                <div class="coins" style="font-size:12px;padding:4px 10px">
+                    <span>🪙</span><span>5,250</span>
+                </div>
+            </div>
+            <div class="screen-content">
+                <div class="store-tabs">
+                    <div class="store-tab active">🪙 কয়েন</div>
+                    <div class="store-tab">💎 প্রিমিয়াম</div>
+                    <div class="store-tab">👤 অবতার</div>
+                    <div class="store-tab">🃏 কার্ড স্কিন</div>
+                    <div class="store-tab">🎨 টেবিল</div>
+                    <div class="store-tab">😀 ইমোজি</div>
+                </div>
+
+                <div class="store-featured">
+                    <div class="sf-tag">✨ সেরা মূল্য</div>
+                    <div class="sf-title">প্রিমিয়াম পাস</div>
+                    <div class="sf-desc">এক্সক্লুসিভ পুরস্কার ও সুবিধা আনলক করুন</div>
+                    <div class="sf-price">৳ ২৯৯/মাস</div>
+                </div>
+
+                <div class="section-title" style="padding:0 16px;margin-top:16px">🪙 কয়েন প্যাক</div>
+                <div class="store-grid">
+                    <div class="store-item">
+                        <div class="si-icon">🪙</div>
+                        <div class="si-name">৫০০ কয়েন</div>
+                        <div class="si-desc">ছোট প্যাক</div>
+                        <div class="si-price">৳ ৪৯</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="si-icon">💰</div>
+                        <div class="si-name">২,০০০ কয়েন</div>
+                        <div class="si-desc">মিডিয়াম প্যাক</div>
+                        <div class="si-price">৳ ১৪৯</div>
+                    </div>
+                    <div class="store-item">
+                        <div class="si-icon">🏆</div>
+                        <div class="si-name">৫,০০০ কয়েন</div>
+                        <div class="si-desc">বড় প্যাক</div>
+                        <div class="si-price">৳ ২৯৯</div>
+                    </div>
+                    <div class="store-item" style="border-color:var(--border-gold)">
+                        <div class="si-icon">👑</div>
+                        <div class="si-name">১০,০০০ কয়েন</div>
+                        <div class="si-desc">মেগা প্যাক 🔥</div>
+                        <div class="si-price">৳ ৪৯৯</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav-item" onclick="showScreen('home')"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></div>
+                <div class="nav-item" onclick="showScreen('leaderboard')"><div class="nav-icon">🏆</div><div class="nav-label">লিডারবোর্ড</div></div>
+                <div class="nav-item active"><div class="nav-icon">🛍️</div><div class="nav-label">দোকান</div></div>
+                <div class="nav-item" onclick="showScreen('profile')"><div class="nav-icon">👤</div><div class="nav-label">প্রোফাইল</div></div>
+                <div class="nav-item"><div class="nav-icon">⋯</div><div class="nav-label">আরও</div></div>
+            </div>
+        </div>
+
+        <!-- 14. SETTINGS -->
+        <div class="screen" id="settings">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>সেটিংস</h2>
+            </div>
+            <div class="screen-content">
+                <div class="settings-group">
+                    <div class="settings-group-title">ভাষা</div>
+                    <div class="settings-item">
+                        <div class="si-icon">🌐</div>
+                        <div class="si-label">ভাষা</div>
+                        <div class="si-value">বাংলা</div>
+                        <div class="si-arrow">›</div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-group-title">অডিও</div>
+                    <div class="settings-item">
+                        <div class="si-icon">🔊</div>
+                        <div class="si-label">সাউন্ড ইফেক্ট</div>
+                        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="si-icon">🎵</div>
+                        <div class="si-label">ব্যাকগ্রাউন্ড মিউজিক</div>
+                        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="si-icon">📳</div>
+                        <div class="si-label">ভাইব্রেশন</div>
+                        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-group-title">গ্রাফিক্স</div>
+                    <div class="settings-item">
+                        <div class="si-icon">✨</div>
+                        <div class="si-label">গ্রাফিক্স কোয়ালিটি</div>
+                        <div class="si-value">উচ্চ</div>
+                        <div class="si-arrow">›</div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-group-title">প্রাইভেসি</div>
+                    <div class="settings-item">
+                        <div class="si-icon">🔒</div>
+                        <div class="si-label">প্রাইভেসি সেটিংস</div>
+                        <div class="si-arrow">›</div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="si-icon">🔔</div>
+                        <div class="si-label">নোটিফিকেশন</div>
+                        <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-group-title">অ্যাকাউন্ট</div>
+                    <div class="settings-item">
+                        <div class="si-icon">👤</div>
+                        <div class="si-label">অ্যাকাউন্ট তথ্য</div>
+                        <div class="si-arrow">›</div>
+                    </div>
+                    <div class="settings-item">
+                        <div class="si-icon">📧</div>
+                        <div class="si-label">সাপোর্ট</div>
+                        <div class="si-arrow">›</div>
+                    </div>
+                </div>
+
+                <button class="btn-danger">🚪 লগ আউট</button>
+
+                <div style="text-align:center;padding:16px;color:var(--text-muted);font-size:11px">
+                    ২৯ কার্ড গেম v1.0.0<br>
+                    © ২০২৬ সর্বস্বত্ব সংরক্ষিত
+                </div>
+            </div>
+        </div>
+
+        <!-- 15. HOW TO PLAY -->
+        <div class="screen" id="howToPlay">
+            <div class="screen-header">
+                <div class="back-btn" onclick="showScreen('home')">←</div>
+                <h2>কিভাবে খেলবেন</h2>
+            </div>
+            <div class="screen-content">
+                <div class="tutorial-cards">
+                    <div class="tutorial-card">
+                        <div class="tc-step">1</div>
+                        <div class="tc-title">🃏 কার্ড বিতরণ</div>
+                        <div class="tc-desc">চারজন খেলোয়াড় দুটি দলে ভাগ হয়ে খেলে। প্রতিটি খেলোয়াড়কে ৮টি করে কার্ড দেওয়া হয় (৩২ কার্ডের ডেক থেকে)। প্রথমে ৪টি কার্ড দেওয়া হয়, বিড এর পর বাকি ৪টি।</div>
+                        <div class="tc-visual">🃏🃏🃏🃏</div>
+                    </div>
+                    <div class="tutorial-card">
+                        <div class="tc-step">2</div>
+                        <div class="tc-title">📢 বিডিং</div>
+                        <div class="tc-desc">প্রথম ৪টি কার্ড পাওয়ার পর খেলোয়াড়রা বিড করেন। সর্বনিম্ন বিড ১৫ এবং সর্বোচ্চ ২৮। যে দল সবচেয়ে বেশি বিড করবে, তারা ট্রাম্প নির্ধারণ করবে।</div>
+                    </div>
+                    <div class="tutorial-card">
+                        <div class="tc-step">3</div>
+                        <div class="tc-title">♥️ ট্রাম্প সুট</div>
+                        <div class="tc-desc">বিড বিজয়ী গোপনে ট্রাম্প সুট নির্ধারণ করেন। ট্রাম্প সুটের কার্ড অন্য সব কার্ডকে হারাতে পারে। প্রয়োজন হলে ট্রাম্প প্রকাশ করা হয়।</div>
+                        <div class="tc-visual">♠ ♥ ♦ ♣</div>
+                    </div>
+                    <div class="tutorial-card">
+                        <div class="tc-step">4</div>
+                        <div class="tc-title">🎯 পয়েন্ট গণনা</div>
+                        <div class="tc-desc">
+                            জ্যাক (J) = ৩ পয়েন্ট<br>
+                            নাইন (9) = ২ পয়েন্ট<br>
+                            এস (A) = ১ পয়েন্ট<br>
+                            দশ (10) = ১ পয়েন্ট<br>
+                            মোট = ২৮ পয়েন্ট + শেষ ট্রিক = ১ = ২৯
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <div class="tc-step">5</div>
+                        <div class="tc-title">🏆 জয়ের শর্ত</div>
+                        <div class="tc-desc">বিড দল তাদের বিডের সমান বা বেশি পয়েন্ট পেলে জেতে। না পারলে প্রতিপক্ষ দল জেতে। লক্ষ্য হলো ট্রিক জিতে পয়েন্ট সংগ্রহ করা!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Screen Navigation
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+
+            document.querySelectorAll('.screen-nav button').forEach(b => b.classList.remove('active'));
+            const buttons = document.querySelectorAll('.screen-nav button');
+            const screenMap = ['splash','home','online','createRoom','joinRoom','friendInvite','botMode','localMulti','gameplay','result','profile','leaderboard','store','settings','howToPlay'];
+            const idx = screenMap.indexOf(screenId);
+            if (idx >= 0 && buttons[idx]) buttons[idx].classList.add('active');
+        }
+
+        // Room type selector
+        document.querySelectorAll('.room-type-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.room-type-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Pill selector
+        document.querySelectorAll('.pill-selector').forEach(selector => {
+            selector.querySelectorAll('.pill').forEach(pill => {
+                pill.addEventListener('click', function() {
+                    this.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        // Difficulty selector
+        document.querySelectorAll('.diff-card').forEach(card => {
+            card.addEventListener('click', function() {
+                document.querySelectorAll('.diff-card').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Leaderboard tabs
+        document.querySelectorAll('.lb-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Store tabs
+        document.querySelectorAll('.store-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.store-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Card hover sound effect (visual only for now)
+        document.querySelectorAll('.hand-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'translateY(-30px) scale(1.1)';
+                this.style.boxShadow = '0 12px 30px rgba(212, 168, 67, 0.4)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.boxShadow = '';
+                }, 300);
+            });
+        });
+
+        // Auto navigate from splash to home after 3 seconds
+        setTimeout(() => {
+            // Optional: auto-navigate
+            // showScreen('home');
+        }, 3000);
+    </script>
+</body>
+</html>

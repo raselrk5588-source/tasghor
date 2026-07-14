@@ -56,3 +56,16 @@ jobs:
               nginx -t && systemctl restart nginx
               echo "Nginx configured and restarted."
             fi
+            
+            # Setup SSL using Certbot if not already configured
+            if ! grep -q "listen 443" $NGINX_CONF; then
+              echo "Setting up SSL..."
+              if ! command -v certbot &> /dev/null; then
+                apt-get update
+                apt-get install -y certbot python3-certbot-nginx
+              fi
+              certbot --nginx --non-interactive --agree-tos -m admin@tasghor.rtsquad.com -d tasghor.rtsquad.com
+              echo "SSL configuration completed."
+            else
+              echo "SSL already configured."
+            fi

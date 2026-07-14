@@ -87,7 +87,9 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height fix for mobile */
             padding: 20px;
+            overscroll-behavior: none; /* Prevent scroll bouncing */
         }
 
         /* ========== NAVIGATION BAR (Screen Selector) ========== */
@@ -140,13 +142,18 @@
         @media (max-width: 768px) {
             body {
                 padding: 0;
+                position: fixed; /* Prevent body scrolling entirely on mobile */
+                width: 100%;
+                height: 100%;
             }
             .phone-frame {
                 width: 100vw;
                 height: 100vh;
-                max-height: 100vh;
+                height: 100dvh; /* Dynamic viewport height fix for mobile */
+                max-height: none;
                 border-radius: 0;
                 border: none;
+                overscroll-behavior: none;
             }
 
         }

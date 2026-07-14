@@ -22,7 +22,10 @@ const UIRenderer = (() => {
         if (nameEl) nameEl.innerText = profile.name;
         
         const levelEl = document.querySelector('#home .player-level');
-        if (levelEl) levelEl.innerText = `লেভেল ${profile.level} • ${profile.rank}`;
+        if (levelEl) {
+            const phone = localStorage.getItem('phone') || profile.id; // fallback to ID if no phone
+            levelEl.innerText = phone;
+        }
         
         const avatarEl = document.querySelector('#home .avatar');
         if (avatarEl) avatarEl.innerHTML = `${profile.avatarEmoji}<div class="level-badge">${profile.level}</div>`;

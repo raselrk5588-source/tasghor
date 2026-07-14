@@ -29,9 +29,6 @@ const UIRenderer = (() => {
         
         const avatarEl = document.querySelector('#home .avatar');
         if (avatarEl) avatarEl.innerHTML = `${profile.avatarEmoji}<div class="level-badge">${profile.level}</div>`;
-        
-        const coinsEl = document.querySelector('#home .coins span:nth-child(2)');
-        if (coinsEl) coinsEl.innerText = profile.coins.toLocaleString();
     }
 
     function renderProfile() {
@@ -63,10 +60,9 @@ const UIRenderer = (() => {
         
         // Stats
         const statValues = document.querySelectorAll('#profile .stat-value');
-        if (statValues.length >= 3) {
+        if (statValues.length >= 2) {
             statValues[0].innerText = `${stats.winRate}%`; // Win rate
             statValues[1].innerText = stats.totalGames; // Matches played
-            statValues[2].innerText = profile.coins.toLocaleString(); // Coins
         }
         
         // Match history

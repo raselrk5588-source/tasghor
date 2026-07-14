@@ -579,10 +579,11 @@
         .home-banner::before {
             content: '🃏';
             position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%) rotate(10deg);
-            font-size: 70px;
+            right: 10px;
+            bottom: -10px;
+            font-size: 65px;
+            line-height: 1;
+            transform: rotate(-10deg);
             opacity: 0.9;
             text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
         }

@@ -250,7 +250,8 @@ const App = (() => {
                                 
                                 const slotName = slot.querySelector('.fi-name');
                                 if (slotName) {
-                                    slotName.innerText = friendName;
+                                    slotName.dataset.realname = friendName;
+                                    slotName.innerText = friendName.replace(' (Bot)', '');
                                     slotName.style.color = 'var(--text-primary)';
                                 }
                                 
@@ -552,7 +553,10 @@ const App = (() => {
                         
                         const nameEl = slot0.querySelector('.fi-name');
                         const avatarEl = slot0.querySelector('.fi-avatar');
-                        if (nameEl) nameEl.innerText = myName + ' (Host)';
+                        if (nameEl) {
+                            nameEl.dataset.realname = myName;
+                            nameEl.innerText = myName + ' (Host)';
+                        }
                         if (avatarEl) avatarEl.innerHTML = myAvatar + '<div class="online-dot"></div>';
                     }
 
@@ -572,7 +576,7 @@ const App = (() => {
                         div.innerHTML = `
                             <div class="fi-avatar">${user.avatar || '😎'}<div class="online-dot"></div></div>
                             <div class="fi-info">
-                                <div class="fi-name">${user.name || 'Unknown'}</div>
+                                <div class="fi-name">${(user.name || 'Unknown').replace(' (Bot)', '')}</div>
                                 <div class="fi-status">অনলাইন</div>
                             </div>
                             <button class="fi-invite-btn online-lobby-invite">আমন্ত্রণ</button>
@@ -584,6 +588,36 @@ const App = (() => {
                         
                         btn.onclick = function() {
                             if (this.innerText === 'আমন্ত্রিত' || this.innerText === 'অপেক্ষারত' || this.style.opacity === '0.4' || this.innerText === 'যুক্ত হয়েছে') return;
+                            
+                            // Check if lobby is full (no empty slots)
+                            const emptySlots = document.querySelectorAll('#onlineLobbySlots .empty-slot');
+                            if (emptySlots.length === 0) {
+                                const toast = document.createElement('div');
+                                toast.innerText = 'লবি পূর্ণ হয়ে গেছে! আর কাউকে আমন্ত্রণ করা যাবে না।';
+                                toast.style.position = 'fixed';
+                                toast.style.bottom = '40px';
+                                toast.style.left = '50%';
+                                toast.style.transform = 'translateX(-50%)';
+                                toast.style.background = '#d32f2f'; // Red for error
+                                toast.style.color = '#fff';
+                                toast.style.padding = '12px 24px';
+                                toast.style.borderRadius = '24px';
+                                toast.style.zIndex = '9999';
+                                toast.style.boxShadow = 'var(--shadow-card)';
+                                toast.style.fontWeight = '600';
+                                toast.style.animation = 'fadeInOut 2s ease forwards';
+                                toast.style.textAlign = 'center';
+                                toast.style.width = 'calc(100% - 40px)';
+                                toast.style.maxWidth = '320px';
+                                toast.style.boxSizing = 'border-box';
+                                toast.style.wordWrap = 'break-word';
+                                document.body.appendChild(toast);
+                                
+                                setTimeout(() => {
+                                    if(document.body.contains(toast)) toast.remove();
+                                }, 2500);
+                                return;
+                            }
                             
                             this.innerText = 'অপেক্ষারত';
                             this.style.opacity = '0.8';
@@ -648,7 +682,10 @@ const App = (() => {
             slots.forEach(slot => {
                 const nameEl = slot.querySelector('.fi-name');
                 const avatarEl = slot.querySelector('.fi-avatar');
-                if (nameEl) names.push(nameEl.innerText.replace(' (Host)', ''));
+                if (nameEl) {
+                    const rName = nameEl.dataset.realname || nameEl.innerText;
+                    names.push(rName.replace(' (Host)', ''));
+                }
                 if (avatarEl) avatars.push(avatarEl.innerHTML.replace('<div class="online-dot"></div>', '').trim());
             });
         }

@@ -91,7 +91,7 @@ const FirebaseManager = {
             
             // --- AI BOTS ---
             const staticBots = [
-                { phone: 'bot_1', name: 'Tarek (Bot)', avatar: '👦', status: 'online' },
+                { phone: 'bot_1', name: 'Hasan (Bot)', avatar: '👦', status: 'online' },
                 { phone: 'bot_2', name: 'Rahim (Bot)', avatar: '👨', status: 'online' },
                 { phone: 'bot_3', name: 'Ayesha (Bot)', avatar: '👩', status: 'online' },
                 { phone: 'bot_4', name: 'Karim (Bot)', avatar: '🧔', status: 'online' },
@@ -128,7 +128,7 @@ const FirebaseManager = {
                 if (this._inviteResponseCallback) {
                     // Extract bot name from the bots array
                     const bots = [
-                        { phone: 'bot_1', name: 'Tarek (Bot)', avatar: '👦' },
+                        { phone: 'bot_1', name: 'Hasan (Bot)', avatar: '👦' },
                         { phone: 'bot_2', name: 'Rahim (Bot)', avatar: '👨' },
                         { phone: 'bot_3', name: 'Ayesha (Bot)', avatar: '👩' },
                         { phone: 'bot_4', name: 'Karim (Bot)', avatar: '🧔' },

@@ -12,8 +12,8 @@ const Storage = (() => {
     };
 
     const DEFAULT_PROFILE = {
-        name: 'তারেক',
-        nameEn: 'Tarek',
+        name: 'হাসান',
+        nameEn: 'Hasan',
         avatarEmoji: '👤',
         level: 1,
         xp: 0,

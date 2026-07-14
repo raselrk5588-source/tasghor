@@ -76,7 +76,7 @@ try {
         initialDealer: 3, // host is dealer, def is 1
         hostPhone: '12345',
         myAbsoluteIndex: 1, // 'def' is absolute index 1
-        playerNames: ['def', 'Tarek (Bot)', 'Rahim (Bot)', 'abc'], // Relative names
+        playerNames: ['def', 'Hasan (Bot)', 'Rahim (Bot)', 'abc'], // Relative names
         playerAvatars: ['👤', '🤖', '🤖', '👤']
     });
     state = GameEngine.dealFirstFour(state);

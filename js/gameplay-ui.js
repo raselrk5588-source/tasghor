@@ -180,7 +180,7 @@ const GameplayUI = (() => {
         
         let needsTrumpDecision = false;
         if (gameState.currentPlayer === localPlayerIndex && gameState.phase === 'playing') {
-            if (gameState.currentTrick.length > 0 && !gameState.trumpRevealed && !hasDeclinedTrump) {
+            if (gameState.currentTrick.length > 0 && gameState.currentTrick.length < 4 && !gameState.trumpRevealed && !hasDeclinedTrump) {
                 const leadSuit = gameState.currentTrick[0].card.suit;
                 const hasLeadSuit = hand.some(c => c.suit === leadSuit);
                 if (!hasLeadSuit) {

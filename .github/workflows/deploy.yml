@@ -17,8 +17,20 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           script: |
-            cd /var/www/tasghor.rtsquad.com
+            mkdir -p /var/www
+            cd /var/www
+            
+            # If the folder doesn't exist, clone it
+            if [ ! -d "tasghor.rtsquad.com" ]; then
+              git clone https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git tasghor.rtsquad.com
+            fi
+            
+            cd tasghor.rtsquad.com
             git config --global --add safe.directory /var/www/tasghor.rtsquad.com
+            
+            # Update remote with current action token to prevent auth errors
+            git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+            
             git fetch origin
             git checkout ${{ github.ref_name }}
             git reset --hard origin/${{ github.ref_name }}

@@ -227,7 +227,17 @@
                     body: new URLSearchParams({ user_mobile: phone })
                 });
 
-                const data = await res.json();
+                const resText = await res.text();
+                let data;
+                try {
+                    data = JSON.parse(resText);
+                } catch (parseError) {
+                    console.error("Failed to parse JSON. Raw response:", resText);
+                    showCustomAlert("Server returned invalid data. Check console.");
+                    btn.style.display = "block";
+                    loader.style.display = "none";
+                    return;
+                }
 
                 if (data.success) {
                     localStorage.setItem("phone", phone);
@@ -252,7 +262,8 @@
                 }
 
             } catch (e) {
-                showCustomAlert("Network error");
+                console.error("Login error:", e);
+                showCustomAlert("Network error: " + e.message);
                 btn.style.display = "block";
                 loader.style.display = "none";
             }

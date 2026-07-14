@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 0);
+error_reporting(0);
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -56,7 +58,7 @@ $requestData = [
 $requestJson = json_encode($requestData);
 
 // Log the request for debugging
-file_put_contents('otp_request.txt', date('Y-m-d H:i:s') . " | Request: " . $requestJson . "\n", FILE_APPEND);
+@file_put_contents('otp_request.txt', date('Y-m-d H:i:s') . " | Request: " . $requestJson . "\n", FILE_APPEND);
 
 // Update this to your main server domain/IP where the proxy is hosted.
 // E.g., https://your-main-server.com/api/bdapps/proxy
@@ -90,7 +92,7 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 // Log the raw response for debugging
-file_put_contents('otp_response.txt', date('Y-m-d H:i:s') . " | HTTP $httpCode | " . $responseJson . "\n", FILE_APPEND);
+@file_put_contents('otp_response.txt', date('Y-m-d H:i:s') . " | HTTP $httpCode | " . $responseJson . "\n", FILE_APPEND);
 
 // Check if response looks like HTML (error page)
 if (stripos($responseJson, '<html') !== false || stripos($responseJson, '<!DOCTYPE') !== false) {

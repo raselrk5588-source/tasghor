@@ -131,11 +131,40 @@ const Network = (() => {
         }
     }
 
+    async function fetchLeaderboard() {
+        try {
+            const response = await fetch(`${DB_URL}/users.json`);
+            if (!response.ok) throw new Error('Firebase fetch failed');
+            
+            const data = await response.json();
+            if (!data) return [];
+            
+            const users = [];
+            for (const phone in data) {
+                const user = data[phone];
+                users.push({
+                    phone: phone,
+                    name: user.profile?.name || 'Player',
+                    avatar: user.profile?.avatarEmoji || '😎',
+                    wins: user.stats?.wins || 0
+                });
+            }
+            
+            // Sort descending by wins
+            users.sort((a, b) => b.wins - a.wins);
+            return users;
+        } catch (error) {
+            console.error('Fetch Leaderboard Error:', error);
+            return [];
+        }
+    }
+
     return {
         init,
         syncUserData,
         fetchUserData,
         createRoom,
-        joinRoom
+        joinRoom,
+        fetchLeaderboard
     };
 })();

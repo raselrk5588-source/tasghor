@@ -10,7 +10,7 @@ const UIRenderer = (() => {
             case 'profile': renderProfile(); break;
             case 'result': renderResult(); break;
             case 'settings': renderSettings(); break;
-            // Add other screens if needed
+            case 'leaderboard': renderLeaderboard(); break;
         }
     }
 
@@ -176,6 +176,96 @@ const UIRenderer = (() => {
                     Storage.updateSetting('vibration', this.classList.contains('on'));
                 };
             }
+        }
+    }
+
+    async function renderLeaderboard() {
+        const topThreeContainer = document.querySelector('#leaderboard .lb-top-three');
+        const listContainer = document.querySelector('#leaderboard .lb-list');
+        
+        if (!topThreeContainer || !listContainer) return;
+        
+        if (typeof Network === 'undefined' || !Network.fetchLeaderboard) return;
+        
+        // Show loading (optional)
+        topThreeContainer.innerHTML = '<div style="text-align:center; padding: 20px; color: var(--gold-light);">লোড হচ্ছে...</div>';
+        listContainer.innerHTML = '';
+        
+        const users = await Network.fetchLeaderboard();
+        if (users.length === 0) {
+            topThreeContainer.innerHTML = '<div style="text-align:center; color: white;">কোনো ডাটা পাওয়া যায়নি।</div>';
+            return;
+        }
+        
+        const currentUserPhone = localStorage.getItem('phone');
+        
+        // --- Render Top 3 ---
+        topThreeContainer.innerHTML = '';
+        const top3 = users.slice(0, 3);
+        
+        const renderTopPlayer = (player, rank) => {
+            if (!player) return '';
+            const medal = rank === 1 ? '👑' : rank === 2 ? '🥈' : '🥉';
+            return `
+                <div class="lb-top-player">
+                    <div class="ltp-avatar">${medal}<div class="ltp-rank">${rank}</div></div>
+                    <div class="ltp-name">${player.name}</div>
+                    <div class="ltp-score">${player.wins} জয়</div>
+                </div>
+            `;
+        };
+        
+        let top3HTML = '';
+        if (top3[1]) top3HTML += renderTopPlayer(top3[1], 2);
+        if (top3[0]) top3HTML += renderTopPlayer(top3[0], 1);
+        if (top3[2]) top3HTML += renderTopPlayer(top3[2], 3);
+        
+        topThreeContainer.innerHTML = top3HTML;
+        
+        // --- Render List ---
+        listContainer.innerHTML = '';
+        let currentUserRank = users.findIndex(u => u.phone === currentUserPhone);
+        
+        // 1. Render logged in user right below Top 3 (if exists and is ranked)
+        if (currentUserRank !== -1) {
+            const myUser = users[currentUserRank];
+            const isMeStyle = `style="border-color:var(--gold-primary);background:rgba(212,168,67,0.08)"`;
+            const rankStyle = `style="color:var(--gold-primary)"`;
+            const avatarStyle = `style="border-color:var(--gold-primary)"`;
+            const nameStyle = `style="color:var(--gold-light)"`;
+            
+            listContainer.innerHTML += `
+                <div class="lb-item" ${isMeStyle}>
+                    <div class="lb-rank" ${rankStyle}>${currentUserRank + 1}</div>
+                    <div class="lb-avatar" ${avatarStyle}>${myUser.avatar}</div>
+                    <div class="lb-info">
+                        <div class="lb-name" ${nameStyle}>${myUser.name} (আপনি)</div>
+                    </div>
+                    <div class="lb-pts">${myUser.wins} জয়</div>
+                </div>
+            `;
+        }
+        
+        // 2. Render others (up to top 100)
+        let addedCount = 0;
+        for (let i = 3; i < users.length; i++) {
+            if (addedCount > 100) break;
+            const player = users[i];
+            
+            // Skip if it's the current user (already shown)
+            if (player.phone === currentUserPhone) continue;
+            
+            listContainer.innerHTML += `
+                <div class="lb-item">
+                    <div class="lb-rank">${i + 1}</div>
+                    <div class="lb-avatar">${player.avatar}</div>
+                    <div class="lb-info">
+                        <div class="lb-name">${player.name}</div>
+                    </div>
+                    <div class="lb-pts">${player.wins} জয়</div>
+                </div>
+            `;
+            addedCount++;
         }
     }
 

@@ -45,6 +45,10 @@ const UIRenderer = (() => {
         const idEl = document.querySelector('#profile .profile-id');
         if (idEl) idEl.innerText = `ID: ${profile.id}`;
         
+        const phoneEl = document.querySelector('#profile .profile-phone');
+        const phone = localStorage.getItem('phone') || '';
+        if (phoneEl) phoneEl.innerText = phone;
+        
         const avatarEl = document.querySelector('#profile .profile-avatar');
         if (avatarEl) avatarEl.innerHTML = `${profile.avatarEmoji}<div class="profile-level">Lv.${profile.level}</div>`;
         

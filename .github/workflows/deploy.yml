@@ -10,13 +10,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check network connection to VPS
-        run: |
-          echo "Pinging VPS_HOST..."
-          ping -c 4 ${{ secrets.VPS_HOST }}
-          echo "Testing port 22..."
-          nc -zv ${{ secrets.VPS_HOST }} 22 || echo "Port 22 is unreachable from GitHub!"
-
       - name: Deploy to VPS
         uses: appleboy/ssh-action@master
         with:

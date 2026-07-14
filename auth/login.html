@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="landing-wrapper">
         <!-- Background Effects -->
@@ -50,17 +52,26 @@
                     <p class="lr-subtitle">মোবাইল নম্বর দিয়ে শুরু করুন।<br>মাত্র ৪ টাকায় পান সব সুবিধা।</p>
 
                     <div class="lr-stepper">
-                        <div class="step active"><div class="step-num">১</div> নম্বর দিন</div>
+                        <div class="step active">
+                            <div class="step-num">১</div> নম্বর দিন
+                        </div>
                         <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="step"><div class="step-num">২</div> OTP</div>
+                        <div class="step">
+                            <div class="step-num">২</div> OTP
+                        </div>
                         <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="step"><div class="step-num">৩</div> খেলুন</div>
+                        <div class="step">
+                            <div class="step-num">৩</div> খেলুন
+                        </div>
                     </div>
 
                     <div class="lr-benefits">
-                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> অরিজিনাল ২৯ গেম রুলস</div>
-                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> ব্রাউজারে সরাসরি খেলার সুবিধা</div>
-                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> ২৪/৭ নিরবচ্ছিন্ন গেমিং</div>
+                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> অরিজিনাল ২৯ গেম রুলস
+                        </div>
+                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> ব্রাউজারে সরাসরি খেলার
+                            সুবিধা</div>
+                        <div class="lrb-item"><i class="fa-solid fa-circle-check lrb-icon"></i> ২৪/৭ নিরবচ্ছিন্ন গেমিং
+                        </div>
                     </div>
 
                     <div class="lr-input-wrap">
@@ -70,11 +81,15 @@
 
                     <div class="lr-warning">
                         <i class="fa-solid fa-circle-info" style="margin-top:2px;"></i>
-                        <div>প্রতিদিন মাত্র ৪ টাকা চার্জ (ভ্যাট + এসডি + এসসি সহ)। শুধুমাত্র রবি ও এয়ারটেল গ্রাহকদের জন্য।</div>
+                        <div>প্রতিদিন মাত্র ৪ টাকা চার্জ (ভ্যাট + এসডি + এসসি)। শুধুমাত্র রবি ও এয়ারটেল গ্রাহকদের জন্য।
+                        </div>
                     </div>
 
-                    <button id="auth-btn" class="primary-btn glow-btn" onclick="handleLogin()">গেম খেলা শুরু করুন ➔</button>
-                    <div id="loader" style="display:none; text-align:center; color:var(--gold-light); margin-top:15px; font-size:14px; font-weight:600;">অপেক্ষা করুন...</div>
+                    <button id="auth-btn" class="primary-btn glow-btn" onclick="handleLogin()">গেম খেলা শুরু করুন
+                        ➔</button>
+                    <div id="loader"
+                        style="display:none; text-align:center; color:var(--gold-light); margin-top:15px; font-size:14px; font-weight:600;">
+                        অপেক্ষা করুন...</div>
                 </div>
             </div>
         </div>
@@ -87,7 +102,7 @@
             <h2>আমাদের বিশেষ ফিচার</h2>
             <span class="decor-line"></span>
         </div>
-        
+
         <div class="features-grid">
             <div class="f-card">
                 <div class="fc-icon"><i class="fa-solid fa-globe"></i></div>
@@ -219,7 +234,7 @@
                     localStorage.setItem("ref", data.referenceNo);
                     window.location.href = "otp.html";
                 } else if (
-                    data.statusCode === 'E1351' || 
+                    data.statusCode === 'E1351' ||
                     (data.statusDetail && data.statusDetail.toLowerCase().includes("already")) ||
                     (data.message && data.message.toLowerCase().includes("already"))
                 ) {
@@ -244,4 +259,5 @@
         }
     </script>
 </body>
+
 </html>

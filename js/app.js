@@ -711,7 +711,20 @@ const App = (() => {
     
     function leaveLobby() {
         localStorage.removeItem('currentHost');
-        // If we want to notify the host that we left, we could do it here
+        
+        const activeScreen = document.querySelector('.screen.active');
+        if (activeScreen) {
+            const panel = activeScreen.querySelector('.matchmaking-panel');
+            const cardsContainer = activeScreen.querySelector('.match-cards, .local-modes');
+            
+            // If panel is visible, go back to cards list
+            if (panel && panel.style.display === 'block') {
+                panel.style.display = 'none';
+                if (cardsContainer) cardsContainer.style.display = 'block';
+                return;
+            }
+        }
+        
         showScreen('home');
     }
 
@@ -760,6 +773,9 @@ const App = (() => {
             }
         }
         
+        const activeScreen = document.querySelector('.screen.active');
+        const sourceScreenId = activeScreen ? activeScreen.id : 'home';
+        
         gameState = GameEngine.createGameState({
             gameMode: mode,
             botDifficulty: botDifficulty,
@@ -770,7 +786,8 @@ const App = (() => {
             isHost: isHost,
             hostPhone: hostPhone,
             myAbsoluteIndex: myAbsoluteIndex,
-            initialDealer: (0 - myAbsoluteIndex + 4) % 4
+            initialDealer: (0 - myAbsoluteIndex + 4) % 4,
+            sourceScreen: sourceScreenId
         });
         
         localPlayerIndex = 0; // Human is bottom
@@ -907,7 +924,7 @@ const App = (() => {
 
     // ---- Action Handler ----
 
-    function handlePlayerAction(action, data, playerIndex = localPlayerIndex, fromNetwork = false) {
+    async function handlePlayerAction(action, data, playerIndex = localPlayerIndex, fromNetwork = false) {
         // Prevent actions if not turn
         if (gameState.currentPlayer !== playerIndex && action !== 'leave_game') return;
 
@@ -971,8 +988,22 @@ const App = (() => {
                 break;
                 
             case 'leave_game':
-                if (botActionTimer) clearTimeout(botActionTimer);
-                showScreen('home');
+                const confirmLeave = await showCustomConfirm("গেম থেকে বের হতে চান?", "আপনি কি নিশ্চিত যে গেম থেকে বের হতে চান? আপনার বর্তমান গেমটি বাতিল হয়ে যাবে।");
+                if (confirmLeave) {
+                    if (botActionTimer) clearTimeout(botActionTimer);
+                    
+                    let targetScreen = 'home';
+                    if (gameState && gameState.config && gameState.config.sourceScreen) {
+                        targetScreen = gameState.config.sourceScreen;
+                    } else if (gameState && gameState.config) {
+                        switch (gameState.config.gameMode) {
+                            case 'online': targetScreen = 'online'; break;
+                            case 'bot': targetScreen = 'botMode'; break;
+                            case 'lan': targetScreen = 'localMulti'; break;
+                        }
+                    }
+                    showScreen(targetScreen);
+                }
                 break;
         }
     }

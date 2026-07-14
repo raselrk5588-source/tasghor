@@ -180,6 +180,7 @@ const UIRenderer = (() => {
     }
 
     return {
-        renderScreen
+        renderScreen,
+        renderResult
     };
 })();

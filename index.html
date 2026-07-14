@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>২৯ কার্ড গেম - Premium UI/UX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
 
@@ -72,7 +76,6 @@
             <div class="home-banner">
                 <div class="banner-label">🔥 দৈনিক চ্যালেঞ্জ</div>
                 <div class="banner-title">আজকের টুর্নামেন্ট</div>
-                <div class="banner-desc">১০,০০০ কয়েন পুরস্কার জিতুন!</div>
             </div>
 
             <div class="home-menu">
@@ -135,12 +138,11 @@
             </div>
             <div class="screen-content">
                 <div class="match-cards">
-                    <div class="match-card" onclick="App.startMatchmaking('online', 'medium')">
+                    <div class="match-card" onclick="App.startGame('bot', 'medium')">
                         <div class="mc-icon">⚡</div>
                         <div class="mc-info">
                             <div class="mc-title">কুইক ম্যাচ</div>
                             <div class="mc-desc">দ্রুত ম্যাচ খেলুন</div>
-                            <div class="mc-players">🟢 ১,২৪৫ জন অনলাইন</div>
                         </div>
                         <div class="mc-arrow">›</div>
                     </div>
@@ -149,7 +151,6 @@
                         <div class="mc-info">
                             <div class="mc-title">র‍্যাঙ্কড ম্যাচ</div>
                             <div class="mc-desc">র‍্যাঙ্ক বাড়ান ও পুরস্কার জিতুন</div>
-                            <div class="mc-players">🟢 ৮৭৬ জন অনলাইন</div>
                         </div>
                         <div class="mc-arrow">›</div>
                     </div>
@@ -158,7 +159,6 @@
                         <div class="mc-info">
                             <div class="mc-title">ক্লাসিক ম্যাচ</div>
                             <div class="mc-desc">পরিচিত ক্লাসিক ২৯ নিয়মে</div>
-                            <div class="mc-players">🟢 ৫৪৩ জন অনলাইন</div>
                         </div>
                         <div class="mc-arrow">›</div>
                     </div>
@@ -167,7 +167,14 @@
                         <div class="mc-info">
                             <div class="mc-title">টুর্নামেন্ট</div>
                             <div class="mc-desc">বড় পুরস্কারের জন্য প্রতিযোগিতা</div>
-                            <div class="mc-players">🟢 ৩২১ জন অনলাইন</div>
+                        </div>
+                        <div class="mc-arrow">›</div>
+                    </div>
+                    <div class="match-card" onclick="App.startMatchmaking('online', 'medium')">
+                        <div class="mc-icon">👥</div>
+                        <div class="mc-info">
+                            <div class="mc-title">বন্ধুদের সাথে খেলুন</div>
+                            <div class="mc-desc">লবি তৈরি করে বন্ধুদের আমন্ত্রণ জানান</div>
                         </div>
                         <div class="mc-arrow">›</div>
                     </div>
@@ -177,7 +184,8 @@
                     <div class="section-title" style="padding:0 16px; margin-top:16px;">লবি (Lobby)</div>
                     <div class="friend-list" id="onlineLobbySlots">
                         <div class="friend-item">
-                            <div class="fi-avatar">😎<div class="online-dot"></div></div>
+                            <div class="fi-avatar">😎<div class="online-dot"></div>
+                            </div>
                             <div class="fi-info">
                                 <div class="fi-name">আপনি (Host)</div>
                                 <div class="fi-status">সংযুক্ত</div>
@@ -209,7 +217,9 @@
                     </div>
 
                     <div class="btn-container" style="margin-top: 24px;">
-                        <button id="startOnlineMatchBtn" class="btn-gold btn-full" onclick="App.startLobbyGame('online', 'medium')" disabled style="opacity: 0.5;">গেম শুরু করুন</button>
+                        <button id="startOnlineMatchBtn" class="btn-gold btn-full"
+                            onclick="App.startLobbyGame('online', 'medium')" disabled style="opacity: 0.5;">গেম শুরু
+                            করুন</button>
                     </div>
                 </div>
             </div>
@@ -244,7 +254,9 @@
                     <div class="copy-btn">📋</div>
                 </div>
 
-                <div class="section-divider"><div class="divider-line"></div></div>
+                <div class="section-divider">
+                    <div class="divider-line"></div>
+                </div>
 
                 <div class="form-group">
                     <label class="form-label">রাউন্ড সংখ্যা</label>
@@ -269,7 +281,8 @@
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn-gold btn-full" onclick="showScreen('friendInvite')">📩 বন্ধু আমন্ত্রণ করুন</button>
+                    <button class="btn-gold btn-full" onclick="showScreen('friendInvite')">📩 বন্ধু আমন্ত্রণ
+                        করুন</button>
                 </div>
             </div>
         </div>
@@ -366,7 +379,8 @@
                 <div class="section-title" style="padding:0 16px">🟢 অনলাইন বন্ধুরা</div>
                 <div class="friend-list">
                     <div class="friend-item">
-                        <div class="fi-avatar">😎<div class="online-dot"></div></div>
+                        <div class="fi-avatar">😎<div class="online-dot"></div>
+                        </div>
                         <div class="fi-info">
                             <div class="fi-name">রাকিব হাসান</div>
                             <div class="fi-status">অনলাইন</div>
@@ -374,7 +388,8 @@
                         <button class="fi-invite-btn">আমন্ত্রণ</button>
                     </div>
                     <div class="friend-item">
-                        <div class="fi-avatar">🧑<div class="online-dot"></div></div>
+                        <div class="fi-avatar">🧑<div class="online-dot"></div>
+                        </div>
                         <div class="fi-info">
                             <div class="fi-name">সুমন আহমেদ</div>
                             <div class="fi-status">অনলাইন</div>
@@ -382,7 +397,8 @@
                         <button class="fi-invite-btn">আমন্ত্রণ</button>
                     </div>
                     <div class="friend-item">
-                        <div class="fi-avatar">😊<div class="online-dot"></div></div>
+                        <div class="fi-avatar">😊<div class="online-dot"></div>
+                        </div>
                         <div class="fi-info">
                             <div class="fi-name">ফারহান খান</div>
                             <div class="fi-status">অনলাইন</div>
@@ -390,7 +406,8 @@
                         <button class="fi-invite-btn">আমন্ত্রণ</button>
                     </div>
                     <div class="friend-item">
-                        <div class="fi-avatar">🤓<div class="online-dot"></div></div>
+                        <div class="fi-avatar">🤓<div class="online-dot"></div>
+                        </div>
                         <div class="fi-info">
                             <div class="fi-name">আরিফ হোসেন</div>
                             <div class="fi-status">অনলাইন</div>
@@ -491,7 +508,8 @@
 
                 <div style="padding:16px;text-align:center;margin-top:20px">
                     <div style="font-size:48px;margin-bottom:12px">📶</div>
-                    <div style="font-size:14px;color:var(--text-secondary)">আপনার বন্ধুদের সাথে ওয়াইফাই বা ব্লুটুথ দিয়ে অফলাইনে খেলুন!</div>
+                    <div style="font-size:14px;color:var(--text-secondary)">আপনার বন্ধুদের সাথে ওয়াইফাই বা ব্লুটুথ
+                        দিয়ে অফলাইনে খেলুন!</div>
                 </div>
             </div>
         </div>
@@ -506,7 +524,8 @@
                 <div class="section-title" style="padding:0 16px; margin-top:16px;">প্লেয়ারস (Players)</div>
                 <div class="friend-list" id="bluetoothSlots">
                     <div class="friend-item">
-                        <div class="fi-avatar">😎<div class="online-dot"></div></div>
+                        <div class="fi-avatar">😎<div class="online-dot"></div>
+                        </div>
                         <div class="fi-info">
                             <div class="fi-name">আপনি (Host)</div>
                             <div class="fi-status">সংযুক্ত</div>
@@ -533,13 +552,17 @@
                 </div>
 
                 <div class="btn-container" style="margin-top: 24px;">
-                    <button class="btn-glass" onclick="App.startBluetoothMatchmaking('lan', 'medium')" style="width:100%; margin-bottom: 12px;">
+                    <button class="btn-glass" onclick="App.startBluetoothMatchmaking('lan', 'medium')"
+                        style="width:100%; margin-bottom: 12px;">
                         <span style="font-size: 20px; margin-right: 8px;">🔍</span> ডিভাইস স্ক্যান করুন
                     </button>
-                    <button class="btn-glass" onclick="App.fillLobbyWithBots()" style="width:100%; margin-bottom: 12px; background: rgba(52, 152, 219, 0.2); border-color: rgba(52, 152, 219, 0.5);">
+                    <button class="btn-glass" onclick="App.fillLobbyWithBots()"
+                        style="width:100%; margin-bottom: 12px; background: rgba(52, 152, 219, 0.2); border-color: rgba(52, 152, 219, 0.5);">
                         <span style="font-size: 20px; margin-right: 8px;">🤖</span> বট দিয়ে পূর্ণ করুন
                     </button>
-                    <button id="startBluetoothBtn" class="btn-gold btn-full" onclick="App.startLobbyGame('lan', 'medium')" disabled style="opacity: 0.5;">গেম শুরু করুন</button>
+                    <button id="startBluetoothBtn" class="btn-gold btn-full"
+                        onclick="App.startLobbyGame('lan', 'medium')" disabled style="opacity: 0.5;">গেম শুরু
+                        করুন</button>
                 </div>
             </div>
         </div>
@@ -547,16 +570,24 @@
         <!-- 9. GAMEPLAY SCREEN -->
         <div class="screen" id="gameplay">
             <div class="game-top-bar">
-                <div class="game-action-btn" onclick="App.handlePlayerAction('leave_game')" style="background: rgba(255,50,50,0.2); border: 1px solid rgba(255,50,50,0.5);">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb3b3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <div class="game-action-btn" onclick="App.handlePlayerAction('leave_game')"
+                    style="background: rgba(255,50,50,0.2); border: 1px solid rgba(255,50,50,0.5);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffb3b3" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
                 </div>
                 <div class="game-scores">
                     <div class="score-chip team-a">আমরা: 12</div>
                     <div class="score-chip team-b">ওরা: 8</div>
                 </div>
                 <div class="game-actions">
-                    <div class="game-action-btn" onclick="document.getElementById('quickChatPopup').classList.toggle('show'); document.getElementById('emojiPopup').classList.remove('show');">💬</div>
-                    <div class="game-action-btn" onclick="document.getElementById('emojiPopup').classList.toggle('show'); document.getElementById('quickChatPopup').classList.remove('show');">😀</div>
+                    <div class="game-action-btn"
+                        onclick="document.getElementById('quickChatPopup').classList.toggle('show'); document.getElementById('emojiPopup').classList.remove('show');">
+                        💬</div>
+                    <div class="game-action-btn"
+                        onclick="document.getElementById('emojiPopup').classList.toggle('show'); document.getElementById('quickChatPopup').classList.remove('show');">
+                        😀</div>
                 </div>
             </div>
 
@@ -564,7 +595,8 @@
                 <div id="quickChatPopup" class="quick-chat-popup">
                     <div class="chat-header">
                         <span style="font-size: 11px; color: var(--text-muted);">মেসেজ পাঠান</span>
-                        <div class="chat-close" onclick="document.getElementById('quickChatPopup').classList.remove('show')">✕</div>
+                        <div class="chat-close"
+                            onclick="document.getElementById('quickChatPopup').classList.remove('show')">✕</div>
                     </div>
                     <div class="chat-option" onclick="App.sendChat('তাড়াতাড়ি খেলুন!')">তাড়াতাড়ি খেলুন!</div>
                     <div class="chat-option" onclick="App.sendChat('দারুণ চাল!')">দারুণ চাল!</div>
@@ -576,19 +608,40 @@
                 <div id="emojiPopup" class="quick-chat-popup emoji-popup">
                     <div class="chat-header">
                         <span style="font-size: 11px; color: var(--text-muted);">ইমোজি পাঠান</span>
-                        <div class="chat-close" onclick="document.getElementById('emojiPopup').classList.remove('show')">✕</div>
+                        <div class="chat-close"
+                            onclick="document.getElementById('emojiPopup').classList.remove('show')">✕</div>
                     </div>
                     <div class="emoji-grid">
-                        <div class="emoji-option" onclick="App.sendChat('😀'); document.getElementById('emojiPopup').classList.remove('show');">😀</div>
-                        <div class="emoji-option" onclick="App.sendChat('😂'); document.getElementById('emojiPopup').classList.remove('show');">😂</div>
-                        <div class="emoji-option" onclick="App.sendChat('😍'); document.getElementById('emojiPopup').classList.remove('show');">😍</div>
-                        <div class="emoji-option" onclick="App.sendChat('😎'); document.getElementById('emojiPopup').classList.remove('show');">😎</div>
-                        <div class="emoji-option" onclick="App.sendChat('😢'); document.getElementById('emojiPopup').classList.remove('show');">😢</div>
-                        <div class="emoji-option" onclick="App.sendChat('😡'); document.getElementById('emojiPopup').classList.remove('show');">😡</div>
-                        <div class="emoji-option" onclick="App.sendChat('👏'); document.getElementById('emojiPopup').classList.remove('show');">👏</div>
-                        <div class="emoji-option" onclick="App.sendChat('👍'); document.getElementById('emojiPopup').classList.remove('show');">👍</div>
-                        <div class="emoji-option" onclick="App.sendChat('👎'); document.getElementById('emojiPopup').classList.remove('show');">👎</div>
-                        <div class="emoji-option" onclick="App.sendChat('💔'); document.getElementById('emojiPopup').classList.remove('show');">💔</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('😀'); document.getElementById('emojiPopup').classList.remove('show');">
+                            😀</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('😂'); document.getElementById('emojiPopup').classList.remove('show');">
+                            😂</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('😍'); document.getElementById('emojiPopup').classList.remove('show');">
+                            😍</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('😎'); document.getElementById('emojiPopup').classList.remove('show');">
+                            😎</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('😢'); document.getElementById('emojiPopup').classList.remove('show');">
+                            😢</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('😡'); document.getElementById('emojiPopup').classList.remove('show');">
+                            😡</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('👏'); document.getElementById('emojiPopup').classList.remove('show');">
+                            👏</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('👍'); document.getElementById('emojiPopup').classList.remove('show');">
+                            👍</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('👎'); document.getElementById('emojiPopup').classList.remove('show');">
+                            👎</div>
+                        <div class="emoji-option"
+                            onclick="App.sendChat('💔'); document.getElementById('emojiPopup').classList.remove('show');">
+                            💔</div>
                     </div>
                 </div>
 
@@ -705,7 +758,9 @@
                 </div>
                 <div class="profile-name">তারেক রহমান</div>
                 <div class="profile-id">ID: #TRK29405</div>
-                <div class="xp-bar"><div class="xp-fill"></div></div>
+                <div class="xp-bar">
+                    <div class="xp-fill"></div>
+                </div>
                 <div class="xp-label">6,800 / 10,000 XP</div>
             </div>
 
@@ -745,9 +800,18 @@
             </div>
 
             <div class="bottom-nav">
-                <div class="nav-item" onclick="showScreen('home')"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></div>
-                <div class="nav-item" onclick="showScreen('leaderboard')"><div class="nav-icon">🏆</div><div class="nav-label">লিডারবোর্ড</div></div>
-                <div class="nav-item active"><div class="nav-icon">👤</div><div class="nav-label">প্রোফাইল</div></div>
+                <div class="nav-item" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">হোম</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('leaderboard')">
+                    <div class="nav-icon">🏆</div>
+                    <div class="nav-label">লিডারবোর্ড</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">প্রোফাইল</div>
+                </div>
             </div>
         </div>
 
@@ -765,17 +829,20 @@
 
                 <div class="lb-top-three">
                     <div class="lb-top-player">
-                        <div class="ltp-avatar">🥈<div class="ltp-rank">2</div></div>
+                        <div class="ltp-avatar">🥈<div class="ltp-rank">2</div>
+                        </div>
                         <div class="ltp-name">রাহুল</div>
                         <div class="ltp-score">৪১৫ জয়</div>
                     </div>
                     <div class="lb-top-player">
-                        <div class="ltp-avatar">👑<div class="ltp-rank">1</div></div>
+                        <div class="ltp-avatar">👑<div class="ltp-rank">1</div>
+                        </div>
                         <div class="ltp-name">তানভীর</div>
                         <div class="ltp-score">৫২০ জয়</div>
                     </div>
                     <div class="lb-top-player">
-                        <div class="ltp-avatar">🥉<div class="ltp-rank">3</div></div>
+                        <div class="ltp-avatar">🥉<div class="ltp-rank">3</div>
+                        </div>
                         <div class="ltp-name">সাকিব</div>
                         <div class="ltp-score">৩৭২ জয়</div>
                     </div>
@@ -785,34 +852,51 @@
                     <div class="lb-item">
                         <div class="lb-rank">4</div>
                         <div class="lb-avatar">😎</div>
-                        <div class="lb-info"><div class="lb-name">রাকিব হাসান</div></div>
+                        <div class="lb-info">
+                            <div class="lb-name">রাকিব হাসান</div>
+                        </div>
                         <div class="lb-pts">৩৮৫ জয়</div>
                     </div>
                     <div class="lb-item">
                         <div class="lb-rank">5</div>
                         <div class="lb-avatar">🧑</div>
-                        <div class="lb-info"><div class="lb-name">সুমন আহমেদ</div></div>
+                        <div class="lb-info">
+                            <div class="lb-name">সুমন আহমেদ</div>
+                        </div>
                         <div class="lb-pts">৩৬০ জয়</div>
                     </div>
                     <div class="lb-item">
                         <div class="lb-rank">6</div>
                         <div class="lb-avatar">😊</div>
-                        <div class="lb-info"><div class="lb-name">ফারহান খান</div></div>
+                        <div class="lb-info">
+                            <div class="lb-name">ফারহান খান</div>
+                        </div>
                         <div class="lb-pts">৩৪২ জয়</div>
                     </div>
                     <div class="lb-item" style="border-color:var(--gold-primary);background:rgba(212,168,67,0.08)">
                         <div class="lb-rank" style="color:var(--gold-primary)">42</div>
                         <div class="lb-avatar" style="border-color:var(--gold-primary)">👤</div>
-                        <div class="lb-info"><div class="lb-name" style="color:var(--gold-light)">তারেক (আপনি)</div></div>
+                        <div class="lb-info">
+                            <div class="lb-name" style="color:var(--gold-light)">তারেক (আপনি)</div>
+                        </div>
                         <div class="lb-pts">১৬৮ জয়</div>
                     </div>
                 </div>
             </div>
 
             <div class="bottom-nav">
-                <div class="nav-item" onclick="showScreen('home')"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></div>
-                <div class="nav-item active"><div class="nav-icon">🏆</div><div class="nav-label">লিডারবোর্ড</div></div>
-                <div class="nav-item" onclick="showScreen('profile')"><div class="nav-icon">👤</div><div class="nav-label">প্রোফাইল</div></div>
+                <div class="nav-item" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">হোম</div>
+                </div>
+                <div class="nav-item active">
+                    <div class="nav-icon">🏆</div>
+                    <div class="nav-label">লিডারবোর্ড</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('profile')">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">প্রোফাইল</div>
+                </div>
             </div>
         </div>
 
@@ -872,9 +956,18 @@
             </div>
 
             <div class="bottom-nav">
-                <div class="nav-item" onclick="showScreen('home')"><div class="nav-icon">🏠</div><div class="nav-label">হোম</div></div>
-                <div class="nav-item" onclick="showScreen('leaderboard')"><div class="nav-icon">🏆</div><div class="nav-label">লিডারবোর্ড</div></div>
-                <div class="nav-item" onclick="showScreen('profile')"><div class="nav-icon">👤</div><div class="nav-label">প্রোফাইল</div></div>
+                <div class="nav-item" onclick="showScreen('home')">
+                    <div class="nav-icon">🏠</div>
+                    <div class="nav-label">হোম</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('leaderboard')">
+                    <div class="nav-icon">🏆</div>
+                    <div class="nav-label">লিডারবোর্ড</div>
+                </div>
+                <div class="nav-item" onclick="showScreen('profile')">
+                    <div class="nav-icon">👤</div>
+                    <div class="nav-label">প্রোফাইল</div>
+                </div>
             </div>
         </div>
 
@@ -972,18 +1065,21 @@
                     <div class="tutorial-card">
                         <div class="tc-step">1</div>
                         <div class="tc-title">🃏 কার্ড বিতরণ</div>
-                        <div class="tc-desc">চারজন খেলোয়াড় দুটি দলে ভাগ হয়ে খেলে। প্রতিটি খেলোয়াড়কে ৮টি করে কার্ড দেওয়া হয় (৩২ কার্ডের ডেক থেকে)। প্রথমে ৪টি কার্ড দেওয়া হয়, বিড এর পর বাকি ৪টি।</div>
+                        <div class="tc-desc">চারজন খেলোয়াড় দুটি দলে ভাগ হয়ে খেলে। প্রতিটি খেলোয়াড়কে ৮টি করে কার্ড
+                            দেওয়া হয় (৩২ কার্ডের ডেক থেকে)। প্রথমে ৪টি কার্ড দেওয়া হয়, বিড এর পর বাকি ৪টি।</div>
                         <div class="tc-visual">🃏🃏🃏🃏</div>
                     </div>
                     <div class="tutorial-card">
                         <div class="tc-step">2</div>
                         <div class="tc-title">📢 বিডিং</div>
-                        <div class="tc-desc">প্রথম ৪টি কার্ড পাওয়ার পর খেলোয়াড়রা বিড করেন। সর্বনিম্ন বিড ১৫ এবং সর্বোচ্চ ২৮। যে দল সবচেয়ে বেশি বিড করবে, তারা ট্রাম্প নির্ধারণ করবে।</div>
+                        <div class="tc-desc">প্রথম ৪টি কার্ড পাওয়ার পর খেলোয়াড়রা বিড করেন। সর্বনিম্ন বিড ১৫ এবং
+                            সর্বোচ্চ ২৮। যে দল সবচেয়ে বেশি বিড করবে, তারা ট্রাম্প নির্ধারণ করবে।</div>
                     </div>
                     <div class="tutorial-card">
                         <div class="tc-step">3</div>
                         <div class="tc-title">♥️ ট্রাম্প সুট</div>
-                        <div class="tc-desc">বিড বিজয়ী গোপনে ট্রাম্প সুট নির্ধারণ করেন। ট্রাম্প সুটের কার্ড অন্য সব কার্ডকে হারাতে পারে। প্রয়োজন হলে ট্রাম্প প্রকাশ করা হয়।</div>
+                        <div class="tc-desc">বিড বিজয়ী গোপনে ট্রাম্প সুট নির্ধারণ করেন। ট্রাম্প সুটের কার্ড অন্য সব
+                            কার্ডকে হারাতে পারে। প্রয়োজন হলে ট্রাম্প প্রকাশ করা হয়।</div>
                         <div class="tc-visual">♠ ♥ ♦ ♣</div>
                     </div>
                     <div class="tutorial-card">
@@ -1000,7 +1096,8 @@
                     <div class="tutorial-card">
                         <div class="tc-step">5</div>
                         <div class="tc-title">🏆 জয়ের শর্ত</div>
-                        <div class="tc-desc">বিড দল তাদের বিডের সমান বা বেশি পয়েন্ট পেলে জেতে। না পারলে প্রতিপক্ষ দল জেতে। লক্ষ্য হলো ট্রিক জিতে পয়েন্ট সংগ্রহ করা!</div>
+                        <div class="tc-desc">বিড দল তাদের বিডের সমান বা বেশি পয়েন্ট পেলে জেতে। না পারলে প্রতিপক্ষ দল
+                            জেতে। লক্ষ্য হলো ট্রিক জিতে পয়েন্ট সংগ্রহ করা!</div>
                     </div>
                 </div>
             </div>
@@ -1016,14 +1113,14 @@
 
             document.querySelectorAll('.screen-nav button').forEach(b => b.classList.remove('active'));
             const buttons = document.querySelectorAll('.screen-nav button');
-            const screenMap = ['splash','home','online','createRoom','joinRoom','friendInvite','botMode','localMulti','bluetoothLobby','gameplay','result','profile','leaderboard','store','settings','howToPlay'];
+            const screenMap = ['splash', 'home', 'online', 'createRoom', 'joinRoom', 'friendInvite', 'botMode', 'localMulti', 'bluetoothLobby', 'gameplay', 'result', 'profile', 'leaderboard', 'store', 'settings', 'howToPlay'];
             const idx = screenMap.indexOf(screenId);
             if (idx >= 0 && buttons[idx]) buttons[idx].classList.add('active');
         }
 
         // Room type selector
         document.querySelectorAll('.room-type-card').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 document.querySelectorAll('.room-type-card').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
             });
@@ -1032,7 +1129,7 @@
         // Pill selector
         document.querySelectorAll('.pill-selector').forEach(selector => {
             selector.querySelectorAll('.pill').forEach(pill => {
-                pill.addEventListener('click', function() {
+                pill.addEventListener('click', function () {
                     this.parentElement.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
                     this.classList.add('active');
                 });
@@ -1041,7 +1138,7 @@
 
         // Difficulty selector
         document.querySelectorAll('.diff-card').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 document.querySelectorAll('.diff-card').forEach(c => c.classList.remove('active'));
                 this.classList.add('active');
             });
@@ -1049,7 +1146,7 @@
 
         // Leaderboard tabs
         document.querySelectorAll('.lb-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
             });
@@ -1057,7 +1154,7 @@
 
         // Store tabs
         document.querySelectorAll('.store-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function () {
                 document.querySelectorAll('.store-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
             });
@@ -1065,7 +1162,7 @@
 
         // Card hover sound effect (visual only for now)
         document.querySelectorAll('.hand-card').forEach(card => {
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function () {
                 this.style.transform = 'translateY(-30px) scale(1.1)';
                 this.style.boxShadow = '0 12px 30px rgba(212, 168, 67, 0.4)';
                 setTimeout(() => {
@@ -1101,8 +1198,10 @@
             <h3 id="ii-title" style="color: var(--gold-primary);">গেমের আমন্ত্রণ!</h3>
             <p id="ii-message" style="margin-bottom: 20px;"><b>রাকিব</b> আপনাকে গেম খেলার জন্য আমন্ত্রণ জানিয়েছে।</p>
             <div class="cm-actions">
-                <button class="cm-btn cm-cancel" id="ii-reject-btn" style="background: rgba(255,0,0,0.1); color: #ff4444; border: 1px solid #ff4444;">বাতিল</button>
-                <button class="cm-btn cm-confirm" id="ii-accept-btn" style="background: var(--green-primary); color: white;">গ্রহণ করুন</button>
+                <button class="cm-btn cm-cancel" id="ii-reject-btn"
+                    style="background: rgba(255,0,0,0.1); color: #ff4444; border: 1px solid #ff4444;">বাতিল</button>
+                <button class="cm-btn cm-confirm" id="ii-accept-btn"
+                    style="background: var(--green-primary); color: white;">গ্রহণ করুন</button>
             </div>
         </div>
     </div>
@@ -1121,4 +1220,5 @@
     <script src="js/ui-renderer.js?v=10"></script>
     <script src="js/app.js?v=10"></script>
 </body>
+
 </html>

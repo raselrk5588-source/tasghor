@@ -72,7 +72,8 @@ const GameEngine = (() => {
                 initialDeck: config.initialDeck || null,
                 isHost: config.isHost !== undefined ? config.isHost : true,
                 hostPhone: config.hostPhone || null,
-                myAbsoluteIndex: config.myAbsoluteIndex || 0
+                myAbsoluteIndex: config.myAbsoluteIndex || 0,
+                sourceScreen: config.sourceScreen || 'home'
             },
 
             // Game state

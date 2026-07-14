@@ -1063,18 +1063,6 @@
     </div>
 
     <script>
-        // Screen Navigation
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-
-            document.querySelectorAll('.screen-nav button').forEach(b => b.classList.remove('active'));
-            const buttons = document.querySelectorAll('.screen-nav button');
-            const screenMap = ['splash', 'home', 'online', 'createRoom', 'joinRoom', 'friendInvite', 'botMode', 'localMulti', 'bluetoothLobby', 'gameplay', 'result', 'profile', 'leaderboard', 'store', 'settings', 'howToPlay'];
-            const idx = screenMap.indexOf(screenId);
-            if (idx >= 0 && buttons[idx]) buttons[idx].classList.add('active');
-        }
-
         // Room type selector
         document.querySelectorAll('.room-type-card').forEach(card => {
             card.addEventListener('click', function () {
@@ -1167,15 +1155,15 @@
     <!-- Firebase SDK (v8) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    <script src="js/firebase-config.js?v=13"></script>
-    <script src="js/network.js?v=13"></script>
-    <script src="js/storage.js?v=13"></script>
-    <script src="js/game-engine.js?v=13"></script>
-    <script src="js/bot-ai.js?v=13"></script>
-    <script src="js/animations.js?v=13"></script>
-    <script src="js/gameplay-ui.js?v=13"></script>
-    <script src="js/ui-renderer.js?v=13"></script>
-    <script src="js/app.js?v=13"></script>
+    <script src="js/firebase-config.js?v=14"></script>
+    <script src="js/network.js?v=14"></script>
+    <script src="js/storage.js?v=14"></script>
+    <script src="js/game-engine.js?v=14"></script>
+    <script src="js/bot-ai.js?v=14"></script>
+    <script src="js/animations.js?v=14"></script>
+    <script src="js/gameplay-ui.js?v=14"></script>
+    <script src="js/ui-renderer.js?v=14"></script>
+    <script src="js/app.js?v=14"></script>
 </body>
 
 </html>

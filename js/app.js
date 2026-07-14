@@ -1194,6 +1194,9 @@ const App = (() => {
             }
         }
     }
+    
+    // Expose to global scope for HTML onclick handlers
+    window.showScreen = showScreen;
 
     return {
         init,

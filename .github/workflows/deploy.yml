@@ -57,6 +57,17 @@ jobs:
               echo "Nginx configured and restarted."
             fi
             
+            # Add PHP-FPM support if missing
+            if ! grep -q "fastcgi_pass" $NGINX_CONF; then
+              echo "Adding PHP configuration to Nginx..."
+              PHP_SOCK=$(ls /var/run/php/*.sock 2>/dev/null | head -n 1)
+              if [ -n "$PHP_SOCK" ]; then
+                # Insert the PHP block before the "location / {" block
+                sed -i "/location \/ {/i \                location ~ \\\\.php$ {\n                    include snippets/fastcgi-php.conf;\n                    fastcgi_pass unix:$PHP_SOCK;\n                }\n" $NGINX_CONF
+                nginx -t && systemctl restart nginx
+              fi
+            fi
+            
             # Setup SSL using Certbot if not already configured
             if ! grep -q "listen 443" $NGINX_CONF; then
               echo "Setting up SSL..."

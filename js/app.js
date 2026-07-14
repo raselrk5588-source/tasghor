@@ -887,6 +887,17 @@ const App = (() => {
                 // Host runs bot logic
                 botActionTimer = setTimeout(() => {
                     const cardId = BotAI.getPlayCard(gameState, gameState.currentPlayer, gameState.config.botDifficulty);
+                    
+                    // If bot is playing a trump card when they don't have the lead suit, they must explicitly reveal it
+                    const hand = gameState.hands[gameState.currentPlayer];
+                    const card = hand.find(c => c.id === cardId);
+                    if (card && gameState.currentTrick.length > 0 && !gameState.trumpRevealed && gameState.trump) {
+                        const leadSuit = gameState.currentTrick[0].card.suit;
+                        if (card.suit === gameState.trump && card.suit !== leadSuit) {
+                            handlePlayerAction('reveal_trump', null, gameState.currentPlayer);
+                        }
+                    }
+                    
                     handlePlayerAction('play_card', cardId, gameState.currentPlayer);
                 }, 1000 + Math.random() * 1000);
             }
@@ -929,6 +940,17 @@ const App = (() => {
                 if (GameEngine.selectTrump(gameState, data)) {
                     GameplayUI.hideBiddingUI();
                     processPlayingPhase();
+                }
+                break;
+                
+            case 'reveal_trump':
+                if (gameState.phase === 'playing' && !gameState.trumpRevealed) {
+                    GameEngine.revealTrump(gameState);
+                    GameplayUI.renderTable();
+                    
+                    if (gameState.pairShown) {
+                        Animations.showFloatingScore(document.querySelector('.game-table'), 'ম্যারিজ! (Pair)', '#f39c12');
+                    }
                 }
                 break;
                 

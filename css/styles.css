@@ -579,11 +579,12 @@
         .home-banner::before {
             content: '🃏';
             position: absolute;
-            right: 15px;
+            right: 20px;
             top: 50%;
-            transform: translateY(-50%);
-            font-size: 60px;
-            opacity: 0.15;
+            transform: translateY(-50%) rotate(10deg);
+            font-size: 70px;
+            opacity: 0.9;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.4);
         }
 
         .home-banner .banner-label {
@@ -1645,9 +1646,10 @@
         /* ========== 10. MATCH RESULT ========== */
         #result {
             background: radial-gradient(ellipse at center top, rgba(212, 168, 67, 0.1), var(--bg-primary) 60%);
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
+            padding: 40px 20px 20px 20px;
         }
 
         .result-trophy {

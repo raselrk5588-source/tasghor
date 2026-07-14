@@ -272,6 +272,20 @@ const GameEngine = (() => {
 
     function revealTrump(state) {
         state.trumpRevealed = true;
+        
+        // Check for Pair (Marriage)
+        for (let i = 0; i < 4; i++) {
+            const hand = state.hands[i];
+            const hasK = hand.find(c => c.rank === 'K' && c.suit === state.trump);
+            const hasQ = hand.find(c => c.rank === 'Q' && c.suit === state.trump);
+            
+            if (hasK && hasQ) {
+                state.pairTeam = TEAM_A.includes(i) ? 'A' : 'B';
+                state.pairShown = true;
+                break;
+            }
+        }
+        
         return state.trump;
     }
 
@@ -316,21 +330,7 @@ const GameEngine = (() => {
             return { success: false, error: 'Must follow suit' };
         }
 
-        // Check if trump needs to be revealed
-        if (state.trump && !state.trumpRevealed && state.currentTrick.length > 0) {
-            const leadSuit = state.currentTrick[0].card.suit;
-            if (card.suit === state.trump && card.suit !== leadSuit) {
-                // Playing trump when not following suit - reveal trump
-                revealTrump(state);
-            }
-        }
-
-        // Also reveal if leading with trump
-        if (state.trump && !state.trumpRevealed && state.currentTrick.length === 0) {
-            if (card.suit === state.trump) {
-                revealTrump(state);
-            }
-        }
+        // No auto-reveal in engine anymore! UI and Bots explicitly call reveal_trump
 
         // Remove card from hand
         hand.splice(cardIndex, 1);
@@ -360,15 +360,15 @@ const GameEngine = (() => {
         for (let i = 1; i < trick.length; i++) {
             const card = trick[i].card;
             
-            if (state.trump && card.suit === state.trump && winningCard.suit !== state.trump) {
-                // Trump beats non-trump
+            if (state.trump && state.trumpRevealed && card.suit === state.trump && winningCard.suit !== state.trump) {
+                // Trump wins over non-trump (only if revealed!)
                 winner = i;
                 winningCard = card;
             } else if (card.suit === winningCard.suit && card.strength > winningCard.strength) {
-                // Same suit, higher strength
+                // Higher card of same suit wins
                 winner = i;
                 winningCard = card;
-            } else if (state.trump && card.suit === state.trump && winningCard.suit === state.trump && card.strength > winningCard.strength) {
+            } else if (state.trump && state.trumpRevealed && card.suit === state.trump && winningCard.suit === state.trump && card.strength > winningCard.strength) {
                 // Both trump, higher wins
                 winner = i;
                 winningCard = card;
@@ -427,7 +427,16 @@ const GameEngine = (() => {
         const bidTeamScore = bidTeam === 'A' ? state.teamAScore : state.teamBScore;
         const otherTeamScore = bidTeam === 'A' ? state.teamBScore : state.teamAScore;
 
-        const bidMet = bidTeamScore >= state.highestBid;
+        let effectiveBid = state.highestBid;
+        if (state.pairShown) {
+            if (state.pairTeam === bidTeam) {
+                effectiveBid -= 4; // Bidding team showed pair, target decreases by 4
+            } else {
+                effectiveBid += 4; // Defending team showed pair, target increases by 4
+            }
+        }
+
+        const bidMet = bidTeamScore >= effectiveBid;
         
         let scoreChange = 1; // 1 match point per round
 

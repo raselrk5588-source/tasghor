@@ -13,6 +13,7 @@ const GameplayUI = (() => {
     // DOM Elements
     let tableEl, playersEl, handEl, trickAreaEl, bidPanelEl, trumpIndicatorEl;
     let teamAScoreEl, teamBScoreEl;
+    let hasDeclinedTrump = false;
     
     function init(state, playerIndex) {
         gameState = state;
@@ -127,7 +128,13 @@ const GameplayUI = (() => {
                 bidToShow = gameState.bids[playerIndex];
             }
         } else if (gameState.phase !== 'bidding' && gameState.highestBidder === playerIndex && gameState.highestBid > 0) {
-            bidToShow = gameState.highestBid;
+            let effBid = gameState.highestBid;
+            if (gameState.pairShown) {
+                const isBidTeam = (gameState.pairTeam === 'A' && (playerIndex === 0 || playerIndex === 2)) || 
+                                  (gameState.pairTeam === 'B' && (playerIndex === 1 || playerIndex === 3));
+                effBid += (isBidTeam ? -4 : 4);
+            }
+            bidToShow = effBid;
         }
 
         if (bidToShow !== null) {
@@ -171,6 +178,24 @@ const GameplayUI = (() => {
         const hand = gameState.hands[localPlayerIndex] || [];
         const validCards = GameEngine.getValidCards(gameState, localPlayerIndex);
         
+        let needsTrumpDecision = false;
+        if (gameState.currentPlayer === localPlayerIndex && gameState.phase === 'playing') {
+            if (gameState.currentTrick.length > 0 && !gameState.trumpRevealed && !hasDeclinedTrump) {
+                const leadSuit = gameState.currentTrick[0].card.suit;
+                const hasLeadSuit = hand.some(c => c.suit === leadSuit);
+                if (!hasLeadSuit) {
+                    needsTrumpDecision = true;
+                }
+            }
+        }
+        
+        if (needsTrumpDecision) {
+            showTrumpRevealUI();
+        } else if (gameState.phase === 'playing') {
+            const bottomBar = document.querySelector('.game-bottom-bar');
+            if (bottomBar) bottomBar.innerHTML = '';
+        }
+        
         hand.forEach((card, i) => {
             const cardEl = document.createElement('div');
             cardEl.className = `hand-card ${card.isRed ? 'red' : 'black'}`;
@@ -195,6 +220,15 @@ const GameplayUI = (() => {
             
             cardEl.onclick = () => {
                 if (isMyTurn && isPlayingPhase && isValid) {
+                    if (needsTrumpDecision) {
+                        const bottomBar = document.querySelector('.game-bottom-bar');
+                        if (bottomBar && bottomBar.innerHTML !== '') {
+                            bottomBar.style.transform = 'scale(1.05)';
+                            setTimeout(() => bottomBar.style.transform = 'scale(1)', 200);
+                            return; // Stop standard flow
+                        }
+                    }
+                    hasDeclinedTrump = false;
                     App.handlePlayerAction('play_card', card.id);
                 }
             };
@@ -326,6 +360,42 @@ const GameplayUI = (() => {
              maxBtn.onclick = () => App.handlePlayerAction('bid', 28);
              bottomBar.appendChild(maxBtn);
         }
+    }
+
+    function showTrumpRevealUI() {
+        const bottomBar = document.querySelector('.game-bottom-bar');
+        if (!bottomBar) return;
+        
+        bottomBar.innerHTML = '';
+        
+        const text = document.createElement('div');
+        text.style.color = 'var(--text-primary)';
+        text.style.marginRight = '12px';
+        text.style.alignSelf = 'center';
+        text.style.fontWeight = '600';
+        text.style.fontSize = '14px';
+        text.innerText = 'ট্রাম্প দেখবেন?';
+        bottomBar.appendChild(text);
+
+        const yesBtn = document.createElement('button');
+        yesBtn.className = 'game-btn primary';
+        yesBtn.innerText = 'হ্যাঁ (Yes)';
+        yesBtn.style.marginRight = '8px';
+        yesBtn.onclick = () => {
+            App.handlePlayerAction('reveal_trump', null);
+            bottomBar.innerHTML = '';
+        };
+        bottomBar.appendChild(yesBtn);
+        
+        const noBtn = document.createElement('button');
+        noBtn.className = 'game-btn secondary';
+        noBtn.innerText = 'না (No)';
+        noBtn.onclick = () => {
+            bottomBar.innerHTML = '';
+            hasDeclinedTrump = true;
+            renderHand(); // re-render hand to allow clicking
+        };
+        bottomBar.appendChild(noBtn);
     }
 
     function hideBiddingUI() {

@@ -275,11 +275,19 @@ const GameplayUI = (() => {
         const myTeamScore = myTeam === 'A' ? gameState.teamAScore : gameState.teamBScore;
         const oppTeamScore = myTeam === 'A' ? gameState.teamBScore : gameState.teamAScore;
         
+        const myTeamMatch = myTeam === 'A' ? gameState.teamAGameScore : gameState.teamBGameScore;
+        const oppTeamMatch = myTeam === 'A' ? gameState.teamBGameScore : gameState.teamAGameScore;
+        
         const chipA = document.querySelector('.score-chip.team-a');
         const chipB = document.querySelector('.score-chip.team-b');
         
-        if (chipA) chipA.innerText = `আমরা: ${myTeamScore}/29`;
-        if (chipB) chipB.innerText = `তারা: ${oppTeamScore}/29`;
+        const getStars = (count) => {
+            if (count <= 0) return '';
+            return ' <span style="color: #ffeb3b; text-shadow: 0 0 2px rgba(0,0,0,0.5);">' + '★'.repeat(count) + '</span>';
+        };
+
+        if (chipA) chipA.innerHTML = `আমরা: ${myTeamScore}` + getStars(myTeamMatch);
+        if (chipB) chipB.innerHTML = `তারা: ${oppTeamScore}` + getStars(oppTeamMatch);
 
         // Also update round scores if visible somewhere (could add to UI)
     }

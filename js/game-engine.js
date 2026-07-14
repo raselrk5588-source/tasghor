@@ -429,14 +429,7 @@ const GameEngine = (() => {
 
         const bidMet = bidTeamScore >= state.highestBid;
         
-        let scoreChange;
-        if (bidMet) {
-            // Bid team wins the round
-            scoreChange = bidTeamScore; // They get their actual score
-        } else {
-            // Bid team loses - other team gets bid value
-            scoreChange = state.highestBid;
-        }
+        let scoreChange = 1; // 1 match point per round
 
         const result = {
             bidTeam,
@@ -467,8 +460,8 @@ const GameEngine = (() => {
         result.teamAGameScore = state.teamAGameScore;
         result.teamBGameScore = state.teamBGameScore;
 
-        // Check if game is over
-        const target = state.config.targetScore;
+        // Check if game is over (Best of 3 -> first to 2 match points wins)
+        const target = 2;
         if (state.teamAGameScore >= target || state.teamBGameScore >= target) {
             state.phase = 'game-over';
             result.gameOver = true;

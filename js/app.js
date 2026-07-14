@@ -1002,7 +1002,7 @@ const App = (() => {
         const roundResult = GameEngine.resolveRound(gameState);
         GameplayUI.updateScores();
         
-        let msg = roundResult.bidMet ? 'ডাক সফল' : 'ডাক ব্যর্থ';
+        let msg = roundResult.bidMet ? 'ডাক সফল! ১ পয়েন্ট' : 'ডাক ব্যর্থ! বিপক্ষ দল ১ পয়েন্ট পেল';
         Animations.showFloatingScore(document.querySelector('.game-table'), msg, roundResult.bidMet ? '#2ecc71' : '#e74c3c');
         
         setTimeout(() => {
